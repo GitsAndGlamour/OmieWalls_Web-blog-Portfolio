@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>
+The Couch Potato Quiz!
+</title>
+	<h1> Are You a Couch Potato? Find Out! Take This Quiz!
+	</h1>
+</head>
+<body>
+<style>
+	body
+	{
+	background-color:#ffffcc;
+	}
+	h1
+	{
+	color:#cc0000;
+	text-align:center;
+	}
+	h5
+	{
+	color:#cc0000;
+	font-size:14;
+	p
+	{
+	font-family:"Times New Roman";
+	font-size:12px;
+	}
+</style>
+	<form>
+	<label for="firstName">First Name: </label>
+	<input type="text" tabindex=1 size="20" maxlength="10" value="Please enter first name" id="firstName" onclick="this.value=''"/></br>
+	<label for="lastName">Last Name: </label>
+	<input type="text" tabindex=2 size="20" maxlength="10" value="Please enter last name" id="lastName" onclick="this.value=''"/></br>
+	<label for="userName">Username: </label>
+	<input type="text" tabindex=3 size="15" maxlength="5" value="Create a Username" id="userName" onclick="this.value=''"/></br>
+	<label for="Password">Password: </label>
+	<input type="password" tabindex=4 size="15" maxlength="5" value="Create a Password" id="Password" onclick="this.value=''"/></br>
+	<label for="Email">E-Mail: </label>
+	<input type="text" tabindex=5 size="20" maxlength="10" value="Enter E-Mail Address" id="Email" onclick="this.value=''"/></br>
+	<h5>What is your age?</h5>
+	<label for="age1">0-12</label>
+	<input type="radio" name="age" id="age1" value="0-12 years"/>
+	<label for="age2">13-17</label>
+	<input type="radio" name="age" id="age2" value="13-17 years"/>
+	<label for="age3">18-25</label>
+	<input type="radio" name="age" id="age3" value="18-25 years"/>
+	<label for="age4">26+</label>
+	<input type="radio"	name="age" id="age4" value="26+ years"/>
+	</br>
+	<h5>What do you normally eat? (Pick up to three)</br></h5>
+	<input type="checkbox" name="eat" id="eat1" value="McDonald's"/><label for="eat1">McDonald's!</label></br>
+	<input type="checkbox" name="eat" id="eat2" value="Whatever is in my kitchen."/><label for="eat2">Whatever's in my kitchen.</label></br>
+	<input type="checkbox" name="eat" id="eat3" value="What food?"/><label for="eat3">What food???</label></br>
+	<input type="checkbox" name="eat" id="eat4" value="A nice balanced meal."/><label for="eat4">A nice balanced meal.</label></br>
+	<input type="checkbox" name="eat" id="eat5" value="Something I hit or picked up along the way home."/><label for="eat5">Something I hit or picked up along the way home.</label></br>
+	<input type="checkbox" name="eat" id="eat6" value="MOM...! What's for dinner?!"/><label for="eat6">Mom...! What's for dinner?!</label></br>
+	<input type="checkbox" name="eat" id="eat7" value="I cooked! *proud*"/><label for="eat7">I cooked! #ProudMoment</label></br>
+	<input type="checkbox" name="eat" id="eat8" value="I don't feel like getting up"/><label for="eat8">I don't feel like getting up.</label></br>
+	<input type="checkbox" name="eat" id="eat9" value="I didn't apply to any of these."/><label for="eat9">I didn't apply to any of these despite you going out of your way to include just about everything possible.</label></br>
+	<input type="checkbox" name="eat" id="eat10" value="Candy!"/><label for="eat10">Candy! Yom...</label></br>
+	<h5>Why do you feel this way?</h5></br>
+	<textarea cols="40" rows="10" id="mytext" onclick="this.value=''">
+Why do you feel like you are or aren't a couch potato? Please explain.
+	</textarea></br>
+	<h5>Which of these is your most favored location in the house:</h5>
+	<select>
+	<option>Couch.. duh!</option>
+	<option>Kitchen.. yum!</option>
+	<option>Bed.. zzz!</option>
+	<option>Shower.. ahh!</option>
+	<option>Porch.. weird!</option>
+	</select></br>
+	<input type="button" value="Submit!"/>
+	<input type="reset" value="Uh oh! Do over."/>
+
+	</form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+#header div{
+position: absolute;
+height: auto;
+width: auto;
+right: 15px;
+}
+#sidebarLeft div{
+position: absolute;
+top: 300px;
+height: auto;
+width: auto;
+left: 10px;
+background-color: #aoa2a3;
+padding-left: 10px;
+padding-right: 10px;
+z-index: 1px;
+}
+#main div{
+}
+#main div div{
+}
+#aboutUs div{
+}
+#aboutUs div div{
+}
+#navigationPane div{
+}
+#navigationPane ul li{
+}
+#navigationPane ul ul{
+visibility: hidden;
+}
+#navigationPane ul li: hover ul{
+visibility: visible;
+}
+#footer div{ 
+}

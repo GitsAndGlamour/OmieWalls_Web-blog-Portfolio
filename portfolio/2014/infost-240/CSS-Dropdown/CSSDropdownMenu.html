@@ -1,0 +1,339 @@
+<html>
+<head>
+<style type="text/css" rel="stylesheet">
+body{
+font-family: Consolas;
+padding-left: 10px;
+padding-right: 10px;
+}
+h1
+{
+text-shadow: 2px 2px #c0c0c0;
+}
+h2{
+font-size: 95%;
+}
+#header{
+right:10px;
+position: absolute;
+}
+#header div table{
+text-align: right;
+}
+#login {
+background-color: #d0d0d0;
+border: inset 1px;
+}
+#login tr {
+padding-right: 10px;
+}
+#logo{
+left:-750px;
+position:absolute;
+top: 30px;
+}
+#motto{
+position: absolute;
+top: 200px;
+right: 50px;
+color: orange;
+text-decoration: bold; 
+font-size: 150%;
+}
+#navigationPane{
+position: absolute;
+top: 150px;
+left: 10px;
+z-index: 5;
+}
+#navigationPane *{
+margin:0;
+padding:0;
+}
+#navigationPane ul li a:link {
+color: #fff;
+text-decoration: none;
+}
+#navigationPane ul li a:hover {
+color: #000;
+}
+#navigationPane ul li a:visited {
+color: #d0d0d0;
+text-decoration: none;
+}
+#navigationPane li{
+list-style-type: none;
+position:relative;
+float:left;
+
+color: #fff;
+}
+#navigationPane ul li {
+background-color: #b81818;
+width: 220px;
+height: auto;
+}
+
+#navigationPane ul ul {
+visibility: hidden;
+position: absolute;
+top:20px;
+}
+#navigationPane ul li:hover ul {
+visibility: visible;
+}
+#sidebarLeft {
+position: absolute;
+top: 300px;
+left: 10px;
+background-color: #d0d0d0;
+padding: 10px;
+z-index:1;
+border-top-left-radius: 25px;
+border-top-right-radius: 25px;
+}
+#sidebarLeft p {
+font-size: 80%;
+}
+#main {
+position: absolute;
+left: 300px;
+top: 300px;
+background-color: #d0d0d0;
+padding-bottom: 25px;
+border: outset #E07A14 1px;
+box-shadow: 5px 5px 10px #e0e0e0;
+border-top-left-radius: 25px;
+border-top-right-radius: 25px;
+}
+#main img{
+border-top-left-radius: 25px;
+border-top-right-radius: 25px;
+border: 1px orange solid;
+}
+#main a:link{
+color: #E07A14;
+text-decoration: bold;
+font-size: 120%;
+}
+#main a:hover{
+color: orange;
+}
+#article {
+position: absolute;
+top:700px;
+left: 300px; 
+}
+#article div{
+position: relative; 
+top: 10px;
+height: 300px;
+width: 400px;
+background-color:#d0d0d0;
+padding: 10px;
+border-top-left-radius: 25px;
+border-top-right-radius: 25px;
+overflow: scroll;
+border: 1px solid black;
+}
+#aboutUs {
+position: absolute;
+right: 10px;
+height: auto;
+width: 200px;
+top: 300px;
+}
+#aboutUs p{
+height: 350px;
+overflow: scroll;
+background-color: #d0d0d0;
+padding: 5px;
+border-top-left-radius: 25px;
+border-top-right-radius: 25px;
+border: 1px solid black;
+}
+</style>
+<title>
+iPi.com - Information Professional Info - Career Information 
+</title>
+</head> 
+<body>
+<div id="header">
+		<div id="logo">
+		<img src="iPiLogo.png"/>
+		</div>
+		<div>
+					<table id="login">
+					<tr>
+					<form action="MAILTO:orwalls@uwm.edu" method="post" enctype="text/plain">
+						<td>
+						<label id="email">E-mail</label>
+						</td>
+						<td>
+						<input type="email" name="email">
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<label id="password">Password</label>
+						</td>
+						<td>
+						<input type="password" name="password">
+						</td>
+					</tr>
+					<tr>
+						<td>
+						</td>
+						<td>
+						<input type="submit" name="register" value="Sign up">
+						<input type="submit" name="submit" value="Login">
+						</td>
+						</form>
+					</tr>
+					<tr>
+					<form>
+						<td>
+						<input type="submit" name="search" value="Go" id="search">
+						</td>
+						<td>
+						<input type="search" name="search" value="Search">
+						</td>
+					</form>
+					</tr>
+					</table>
+		</div>
+</div>
+<div id="motto"><h1>Start a Career Today!</h1></div>
+<div id="navigationPane" style="box-shadow: 5px 8px 10px #d0d0d0;">
+		<ul>
+			<li style="background-color: #B81818;"><a href="#">Careers</a>
+				<ul style="box-shadow: 5px 8px 10px #d0d0d0;">
+					<li style="background-color: #D26D6D;"><a href="#">Computer Network Architects</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Computer Network Support Specialists</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Computer Programmers</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Computer Systems Analysts</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Computer User Support Specialists</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Computer and Information Research Scientists</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Database Administrators</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Information Security Analysts</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Network and Computer Systems Administrators</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Software Developers, Applications</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Software Developers, Systems Software</a></li>
+					<li style="background-color: #D26D6D;"><a href="#">Web Developers</a></li>
+				</ul>
+			</li>
+			<li style="background-color: #E07A14;"><a href="#">Salary</a>
+				<ul style="box-shadow: 5px 8px 10px #d0d0d0;">
+					<li style="background-color: #FFC671;"><a href="#">Wages and Salaries</a></li>
+					<li style="background-color: #FFC671;"><a href="#">Relocating</a></li>
+					<li style="background-color: #FFC671;"><a href="#">Fund Your Education</a></li>
+					<li style="background-color: #FFC671;"><a href="#">Benefits</a></li>
+				</ul>
+			</li>
+			<li style="background-color: #4ABDD9;"><a href="#">Education</a>
+				<ul style="box-shadow: 5px 8px 10px #d0d0d0;">
+					<li style="background-color: #99D6EB;"><a href="#">Plan</a></li>
+					<li style="background-color: #99D6EB;"><a href="#">Find</a></li>
+					<li style="background-color: #99D6EB;"><a href="#">Skill Building</a></li>
+					<li style="background-color: #99D6EB;"><a href="#">Pay</a></li>
+				</ul>
+			</li>
+			<li style="background-color: #990099;"><a href="#">Job Seekers</a>
+				<ul style="box-shadow: 5px 8px 10px #d0d0d0;">
+					<li style="background-color: #CC80CC;"><a href="#">Resume Advice</a></li>
+					<li style="background-color: #CC80CC;"><a href="#">Letters</a></li>
+					<li style="background-color: #CC80CC;"><a href="#">Interviews</a></li>
+				</ul>
+			</li>
+		</ul>
+</div>
+<div id="sidebarLeft">
+		<h2>Fact of the Day:</h2>
+		<img src="leftSidebarFact.jpg" height="200px" width="200px"/>
+		<p>Provided by: <a href="#">Baseline.com</a></p>
+		<h2>Career of the Day: </h2>
+		<img src="leftSidebarPhoto.jpg" height="200px" width="200px"/>
+<p>Computer Architect</P>
+		</div>
+<div id="main">
+		<img src="upperMainPhoto.png" width="400px" height="200px"/>
+		<div>
+			<table style="width:400px; padding: 10px">
+				<tr>
+					<td>
+						<a href="#">Explore Careers</a>
+					</td>
+					<td>
+						<a href="#">Education + Training</a>
+					</td>
+					<td>
+						<a href="#">Resumes + Interviews</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="#">Salary + Benefits</a>
+					</td>
+					<td>
+						<a href="#">Job Search</a>
+					</td>
+					<td>
+						<a href="#">People + Places to Help</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<div id="article">
+<img src="tealNaviTab.png"/>
+<div>
+<h2>How one college went from 10% female computer-science majors to 40%</h2>
+<p>Yes, we know there aren&rsquo;t enough women in tech. Yes, we know we need to change the ratio.</p>
+<p>One college has found the answer.</p>
+<p>With a three-step method,&nbsp;<a href="https://www.google.com/url?q=https%3A%2F%2Fwww.hmc.edu%2F&amp;sa=D&amp;sntz=1&amp;usg=AFQjCNExjXZ34ZfVg4bLgOKmEvU9s0mXvQ" target="_blank">Harvey Mudd College</a>&nbsp;in California quadrupled its female computer science majors. The experiment started in 2006 when&nbsp;<a href="https://www.google.com/url?q=https%3A%2F%2Fwww.hmc.edu%2Fabout-hmc%2Fpresident-klawe%2Fbiography-of-president-maria-klawe%2F&amp;sa=D&amp;sntz=1&amp;usg=AFQjCNG5mvN02wIO_EvYkcrhEEuYvNJAGg" target="_blank">Maria Klawe</a>, a computer scientist and mathematician herself, was appointed college president. That year only 10% of Harvey Mudd&rsquo;s CS majors were women. The department&rsquo;s professors devised a plan.</p>
+<p>They no longer wanted to weed out the weakest students during the first week of the semester. The new goal was to lure in female students and make sure they actually enjoyed their computer science initiation in the hopes of converting them to majors. This is what they did, in three steps.</p>
+<h2>1. Semantics count</h2>
+<p>They renamed the course previously called &ldquo;Introduction to programming in Java&rdquo;&nbsp;to &ldquo;Creative approaches to problem solving in science and engineering using Python.&rdquo; &nbsp;Using words like &ldquo;creative&rdquo; and &ldquo;problem solving&rdquo; just&nbsp;sounded&nbsp;more approachable. Plus, as Klawe describes it, the coding language Python is more forgiving and practical.</p>
+<p>As part of this first step, the professors divided the class into groups&mdash;Gold for those with no coding experience and Black, for those with some coding experience. Then they implemented Operation Eliminate the Macho Effect: guys who showed-off in class were taken aside in class and told, &ldquo;You&rsquo;re so passionate about the material and you&rsquo;re so well prepared. I&rsquo;d love to continue our conversations but let&rsquo;s just do it one on one.&rdquo;</p>
+<p>Literally overnight, Harvey Mudd&rsquo;s introductory CS course went from being the most despised required course to the absolute favorite, says Klawe.</p>
+<p>But that was just the beginning.</p>
+<h2>2.&nbsp;Visualize success</h2>
+<div class="inline-ad"></div><p>After successfully completing the introductory class, how to ensure female students voluntarily signed up for another CS class? The female professors packed up the students and took them to the annual Grace Hopper Conference, which bills itself as a celebration of women in technology. Klawe says the conference is a place for students to visualize women in technology; humans who happened to be female who love computers. Not everyone looks like the dudes in the trailer for HBO&rsquo;s <em>Silicon Valley</em>.</p>
+<h2>3. Make it matter</h2>
+<p>Finally, the college offered a summer of research between freshman and sophomore years so female students could apply their new skills and&nbsp;make something. &ldquo;We had students working on things like educational games and a version of <em>Dance Dance Revolution</em> for the elderly. They could use computer technology to actually work on something that mattered,&rdquo; says Klawe.</p>
+<p>The three-step strategy resulted in a domino effect. Female students loved the CS introductory course. They loved going to the conference.&nbsp;So they took &ldquo;just one more course&rdquo; and they loved that.</p>
+<p>Before they knew it, women were saying, &ldquo;&lsquo;I could be a computer science major, I guess.&rsquo; And so they are!&rdquo; says Klawe.</p>
+<p>By the time the first four-year experiment was over the college had gone from 10%&nbsp;female computer science majors to 40% female. UC Berkeley, Duke, Northwestern have had some success with similar tactics.</p>
+<h2>Is it too late for me?</h2>
+<p>I have a 3-year-old daughter so I felt relieved to hear there is a&nbsp;way to get women into computer science. Sadly, this strategy did not exist when I was a young woman.&nbsp;So in a middle-aged attempt to dip my toes into coding, I took a one-day crash course.</p>
+<p>Watch the video below to see me confront my computer science fears, have an existential crisis, and attempt to build an app. All in one day.</p>
+Source: <a href="http://qz.com/192071/how-one-college-went-from-10-female-computer-science-majors-to-40/"><p>Here</p></a>
+</div>
+</div>
+<div id="siteOfWeek">
+</div>
+<div id="aboutUs">
+		<img src="redNaviTab.png"/>
+		<div>
+		<p>
+		"I want every American looking for work to have the same opportunity...have one program, one website, and one place to go for all the information and help that they need. It is time to turn our unemployment system into a reemployment system that puts people to work."
+		
+		                                - President Barack Obama<br>
+                                        <br>
+Find easy access to online resources to help you boost your skill set and prepare you for your next job. Also find links to specific training and education opportunities.
+Check out tools to help you explore careers, investigate salary and benefit information, plan a job search and browse job sites, and write and improve resumes and cover letters.
+We also offer resources for businesses and employers to learn about hiring and retention efforts, support students and career planning, and develop workplace skills.		
+		</p>
+		
+		</div>
+	</div>
+<div id="footer">
+</div>
+	
+	
+	
+	
+	
+	
+</body>
+</html>

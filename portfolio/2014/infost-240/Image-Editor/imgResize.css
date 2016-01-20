@@ -1,0 +1,15 @@
+body{background-color:#97b600; font-family: Verdana;}
+h2{}
+p{}
+table{text-align: right;}
+.textBox{border-radius: 25px; border: 1px inset;}
+#header{
+text-align: right; height: 12%; width: 100%; position: absolute; top: 0%; left: 0%; background-color: #d0fb00; border-bottom: 1px black inset;}
+#logo{position: absolute; left: 1%; top: 1%; z-index: 1; height: 10%; width: 30%;}
+#username{position: absolute; right: 10%; top: 15%;}
+#password{position: absolute; right: 10%; top: 60%;}
+#go{background-color: #0B0B92; padding: 3px; color: white; border-radius: 25px; box-shadow: 1px 1px 5px #555555; border: none; position: absolute; top: 40%; right: 1%;}
+#options{}
+#changeImg{}
+#imgTitle{color: #0B0B92;}
+#subChanges{background-color: #0B0B92;border: none; padding: 3px; box-shadow: 1px 1px 5px #555555; color: white;}

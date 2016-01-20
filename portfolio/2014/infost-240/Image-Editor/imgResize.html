@@ -1,0 +1,179 @@
+<html>
+	<head>
+		<title>
+			LavaJava.com - Image Editor
+		</title>
+		<link href="imgResize.css" rel="stylesheet" type="text/css"/>
+		<script>	
+			function changeImage() {
+             document.getElementById('imgTitle').innerHTML=document.getElementById('title').value;
+             document.getElementById('changeImg').alt=document.getElementById('altTitle').value;
+             document.getElementById('changeImg').height=document.getElementById('height').value;
+             document.getElementById('changeImg').width=document.getElementById('width').value;
+             document.getElementById('changeImg').border=document.getElementById('border').value;
+             document.getElementById('changeImg').style.borderColor=document.getElementById('borderColor').value;
+             document.getElementById('changeImg').style.opacity=document.getElementById('opacity').value;
+             document.getElementById('changeImg').style.borderRadius=document.getElementById('radius').value;
+            }
+		</script>
+	</head>
+	<body>
+		<img src="logo.jpg" id="logo"/><br />
+		<div id="header">
+		
+			<input type="text" 
+				id="username" 
+				class="textBox"
+				onfocus="this.style.background='#ececec'" 
+				onblur="this.style.background='#ffffff'" 
+				value=" username" 
+				onclick="this.value=''"/><br />
+				
+			<input type="password" 
+				id="password"
+				class="textBox" 
+				onfocus="this.style.background='#ececec'" 
+				onblur="this.style.background='#ffffff'" 
+				value=" password" 
+				onclick="this.value=''"/>
+				
+			<input type="submit" 
+				id="go"
+				class="button"
+				value="submit"/>
+		</div>
+		<br /><br /><br /><br /><br /><br />
+		<h2 id="imgTitle">The Coffee Mug</h2>
+		<img src="changeImg.png" id="changeImg"alt="Coffee Mug with Filters"/>
+		<div id="options">
+			<table>
+				<p>
+					<tr>
+						<td>
+							title 
+						</td>
+						<td>
+							<input type="text" 
+								id="title"  
+								class="textBox" 
+								onfocus="this.style.background='#ececec'" 
+								onblur="this.style.background='#ffffff'">
+						</td>
+						<td>
+							height
+						</td>
+						<td>
+							<input type="text" 
+								id="height"  
+								class="textBox" 
+								onfocus="this.style.background='#ececec'" 
+								onblur="this.style.background='#ffffff'">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							alternate title   
+						</td>
+						<td>
+							<input type="text" 
+								id="altTitle"
+								class="textBox" 
+								onfocus="this.style.background='#ececec'" 
+								onblur="this.style.background='#ffffff'">
+						</td>
+						<td>
+							width
+						</td>
+						<td>
+							<input type="text" 
+							id="width" 
+							class="textBox" 
+							onfocus="this.style.background='#ececec'" 
+							onblur="this.style.background='#ffffff'">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							border radius
+						</td>
+						<td>
+							<select id="radius"
+										onfocus="this.style.background='#ececec'" 
+										onblur="this.style.background='#ffffff'" >
+								<option value="1" id="radius" >size 1</option>
+								<option value="2" id="radius" >size 2</option>
+								<option value="3" id="radius" >size 3</option>
+								<option value="4" id="radius" >size 4</option>
+								<option value="5" id="radius" >size 5</option>
+								<option value="6" id="radius" >size 6</option>
+								<option value="7" id="radius" >size 7</option>
+								<option value="8" id="radius" >size 8</option>
+								<option value="9" id="radius" >size 9</option>
+								<option value="10" id="radius" >size 10</option>
+								<option value="11" id="radius" >size 11</option>
+								<option value="12" id="radius" >size 12</option>
+								<option value="13" id="radius" >size 13</option>
+								<option value="14" id="radius" >size 14</option>
+								<option value="15" id="radius" >size 15</option>
+								<option value="16" id="radius" >size 16</option>
+								<option value="17" id="radius" >size 17</option>
+								<option value="18" id="radius" >size 18</option>
+								<option value="19" id="radius" >size 19</option>
+								<option value="20" id="radius" >size 20</option>
+								<option value="21" id="radius" >size 21</option>
+								<option value="22" id="radius" >size 22</option>
+								<option value="23" id="radius" >size 23</option>
+								<option value="24" id="radius" >size 24</option>
+								<option value="25" id="radius" >size 25</option>
+							</select>
+								
+						</td>
+						<td>
+							opacity
+						</td>
+						<td>
+							<select id="opacity"
+										onfocus="this.style.background='#ececec'" 
+										onblur="this.style.background='#ffffff'" >
+								<option value="0.10">10%</option>
+								<option value="0.20">20%</option>
+								<option value="0.30">30%</option>
+								<option value="0.40">40%</option>
+								<option value="0.50">50%</option>
+								<option value="0.60">60%</option>
+								<option value="0.70">70%</option>
+								<option value="0.80">80%</option>
+								<option value="0.90">90%</option>
+							</select>
+					</tr>
+					<tr>
+						<td>
+							border
+						</td>
+						<td>
+							<input type="text" 
+							id="border" 
+							class="textBox" 
+							onfocus="this.style.background='#ececec'" 
+							onblur="this.style.background='#ffffff'">
+						</td>
+						<td>
+							border color
+						</td>
+						<td>
+							<input type="text" 
+								id="borderColor" 
+								class="textBox" 
+								onfocus="this.style.background='#ececec'" 
+								onblur="this.style.background='#ffffff'">
+						</td>
+					</tr>
+				</p>
+			</table>
+			<input type="button" 
+				id="subChanges" 
+				value="Make Changes"  
+                onclick="changeImage()"/> 
+		</div>
+	</body>
+</html>
