@@ -1,0 +1,413 @@
+Enter password: *************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.6.27-log MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use sois;
+Database changed;
+mysql> alter table course
+    -> add StartDate date;
+Query OK, 0 rows affected (0.33 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table course
+    -> add EndDate date;
+Query OK, 0 rows affected (0.44 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update course
+    -> set startdate = '2012-01-20';
+Query OK, 11 rows affected (0.00 sec)
+Rows matched: 11  Changed: 11  Warnings: 0
+
+mysql> update course
+    -> set enddate = '2012-05-20';
+Query OK, 11 rows affected (0.01 sec)
+Rows matched: 11  Changed: 11  Warnings: 0
+
+mysql> select * from course;
++----------+----------------------------+-------------+---------+-------+-----------+----------+-----------------+------------+------------+
+| CourseID | CourseName                 | Description | Credits | Level | FacultyID | Location | Schedule        | StartDate  | EndDate    |
++----------+----------------------------+-------------+---------+-------+-----------+----------+-----------------+------------+------------+
+|    54311 | Statistics                 | Analytical  |       2 | G     |      1246 | A333     | M/W 9:00-10:45  | 2012-01-20 | 2012-05-20 |
+|    54312 | Java                       | Programming |       3 | U     |      1234 | A104     | T/T 9:30-11:15  | 2012-01-20 | 2012-05-20 |
+|    54313 | Web Design                 | Programming |       3 | U     |      1245 | A102     | M/W 4:45-6:00   | 2012-01-20 | 2012-05-20 |
+|    54314 | Economics                  | Conceptual  |       2 | G     |      1241 | A501     | M/W 8:45-10:15  | 2012-01-20 | 2012-05-20 |
+|    54315 | Human Computer Interaction | Conceptual  |       3 | U     |      NULL | A334     | M/W 5:30-6:45   | 2012-01-20 | 2012-05-20 |
+|    54320 | Fin. Accounting            | Analytical  |       1 | G     |      1240 | A244     | T/T 3:00-4:45   | 2012-01-20 | 2012-05-20 |
+|    54321 | Database Design            | Programming |       1 | G     |      1234 | A397     | M/W 3:00-4:45   | 2012-01-20 | 2012-05-20 |
+|    54322 | Systems Analysis           | Conceptual  |       3 | U     |      1235 | A345     | T/T 11:00-12:45 | 2012-01-20 | 2012-05-20 |
+|    54323 | Security                   | Conceptual  |       3 | U     |      1236 | A554     | T/T 2:30-3:15   | 2012-01-20 | 2012-05-20 |
+|    54324 | Visual Basic               | Programming |       3 | G     |      1237 | A674     | M/W 10:15-12:00 | 2012-01-20 | 2012-05-20 |
+|    54325 | E-Commerce                 | Conceptual  |       2 | U     |      1238 | A298     | T/T 1:00-2:45   | 2012-01-20 | 2012-05-20 |
++----------+----------------------------+-------------+---------+-------+-----------+----------+-----------------+------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> update department
+    -> set departmentname = 'Archival Studies'
+    -> where departmentid = 50;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update department
+    -> set location = 'B402'
+    -> where departmentid = 50;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from department;
++--------------+--------------------------+----------+-------+---------+
+| DepartmentID | DepartmentName           | Location | Phone | Chair   |
++--------------+--------------------------+----------+-------+---------+
+|           50 | Archival Studies         | B402     | 4321  | Robin   |
+|           51 | Information Retrieval    | B431     | 4222  | Sheela  |
+|           52 | Information Organization | B410     | 4223  | Craig   |
+|           53 | Information Policy       | B204     | 4324  | Michael |
+|           54 | Information Management   | B219     | 4325  | Chris   |
+|           55 | Information Security     | B225     | 4332  | Steve   |
+|           56 | Information Technology   | B336     | 4333  | Arthur  |
+|           57 | Information Design       | B300     | 4334  | Amy     |
+|           58 | Health Informatics       | B428     | 4330  | Ravi    |
+|           59 | Information Ethics       | B356     | 4320  | Simon   |
++--------------+--------------------------+----------+-------+---------+
+10 rows in set (0.00 sec)
+
+mysql> update faculty
+    -> set departmentid = 56
+    -> where departmentid is null;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from faculty;
++-----------+-----------+---------+--------+-------+---------------+--------------+-------------+------------+------------+-----------+
+| FacultyID | LName     | FName   | Office | Phone | Email         | DepartmentID | DateOfBirth | DateHired  | Title      | Salary    |
++-----------+-----------+---------+--------+-------+---------------+--------------+-------------+------------+------------+-----------+
+|      1234 | Joans     | Dean    | C234   | 5432  | abc@sois.edu  |           57 | 1974-04-11  | 1995-08-20 | Prof       | 110000.00 |
+|      1235 | Shepard   | Sean    | C334   | 5433  | bcd@sois.edu  |           54 | 1973-01-01  | 2000-08-22 | Assoc Prof |  90000.00 |
+|      1236 | Jackson   | Eric    | C123   | 5434  | cde@sois.edu  |           58 | 1981-09-01  | 2007-08-21 | Assoc Prof |  87000.00 |
+|      1237 | Johnson   | Thomas  | C531   | 5435  | def@sois.edu  |           55 | 1982-11-14  | 2010-01-24 | Lect       |  57000.00 |
+|      1238 | Holmes    | Gary    | C313   | 5436  | efg@sois.edu  |           57 | 1977-10-04  | 1996-08-24 | Prof       | 100000.00 |
+|      1239 | Carr      | Davis   | C411   | 5437  | fgh@sois.edu  |           52 | 1972-03-15  | 2003-08-20 | Assoc Prof |  87000.00 |
+|      1240 | Robertson | Richard | C278   | 5442  | ghi@sois.edu  |           58 | 1972-12-14  | 2011-08-21 | Asst Prof  |  77000.00 |
+|      1241 | Dickson   | Sandy   | C145   | 5443  | hij@sois.edu  |           53 | 1982-05-02  | 2010-03-01 | Lect       |  61000.00 |
+|      1242 | Davidson  | James   | C245   | 5444  | ijk@sois.edu  |           57 | 1979-02-25  | 1999-08-23 | Prof       | 115000.00 |
+|      1243 | Roise     | Adam    | C125   | 5445  | nost@sois.edu |           54 | 1959-10-31  | 2015-10-24 | Lect       |  55000.00 |
+|      1244 | Singh     | Rahul   | C499   | 5446  | klm@sois.edu  |           59 | 1979-10-31  | 2002-08-19 | Assoc Prof |  98000.00 |
+|      1245 | Iyer      | Laxmi   | C211   | 5447  | lmn@sois.edu  |           51 | 1974-05-06  | 2008-08-22 | Asst Prof  |  81000.00 |
+|      1246 | Yu        | She     | C987   | 5448  | mno@sois.edu  |           56 | 1981-11-26  | 2010-08-20 | Asst Prof  |  85000.00 |
++-----------+-----------+---------+--------+-------+---------------+--------------+-------------+------------+------------+-----------+
+13 rows in set (0.00 sec)
+
+mysql> delete from faculty
+    -> where fname = 'Adam'
+    -> and lname = 'Rosie';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from faculty
+    -> where fname = 'Adam'
+    -> and lname = 'Roise';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from faculty;
++-----------+-----------+---------+--------+-------+--------------+--------------+-------------+------------+------------+-----------+
+| FacultyID | LName     | FName   | Office | Phone | Email        | DepartmentID | DateOfBirth | DateHired  | Title      | Salary    |
++-----------+-----------+---------+--------+-------+--------------+--------------+-------------+------------+------------+-----------+
+|      1234 | Joans     | Dean    | C234   | 5432  | abc@sois.edu |           57 | 1974-04-11  | 1995-08-20 | Prof       | 110000.00 |
+|      1235 | Shepard   | Sean    | C334   | 5433  | bcd@sois.edu |           54 | 1973-01-01  | 2000-08-22 | Assoc Prof |  90000.00 |
+|      1236 | Jackson   | Eric    | C123   | 5434  | cde@sois.edu |           58 | 1981-09-01  | 2007-08-21 | Assoc Prof |  87000.00 |
+|      1237 | Johnson   | Thomas  | C531   | 5435  | def@sois.edu |           55 | 1982-11-14  | 2010-01-24 | Lect       |  57000.00 |
+|      1238 | Holmes    | Gary    | C313   | 5436  | efg@sois.edu |           57 | 1977-10-04  | 1996-08-24 | Prof       | 100000.00 |
+|      1239 | Carr      | Davis   | C411   | 5437  | fgh@sois.edu |           52 | 1972-03-15  | 2003-08-20 | Assoc Prof |  87000.00 |
+|      1240 | Robertson | Richard | C278   | 5442  | ghi@sois.edu |           58 | 1972-12-14  | 2011-08-21 | Asst Prof  |  77000.00 |
+|      1241 | Dickson   | Sandy   | C145   | 5443  | hij@sois.edu |           53 | 1982-05-02  | 2010-03-01 | Lect       |  61000.00 |
+|      1242 | Davidson  | James   | C245   | 5444  | ijk@sois.edu |           57 | 1979-02-25  | 1999-08-23 | Prof       | 115000.00 |
+|      1244 | Singh     | Rahul   | C499   | 5446  | klm@sois.edu |           59 | 1979-10-31  | 2002-08-19 | Assoc Prof |  98000.00 |
+|      1245 | Iyer      | Laxmi   | C211   | 5447  | lmn@sois.edu |           51 | 1974-05-06  | 2008-08-22 | Asst Prof  |  81000.00 |
+|      1246 | Yu        | She     | C987   | 5448  | mno@sois.edu |           56 | 1981-11-26  | 2010-08-20 | Asst Prof  |  85000.00 |
++-----------+-----------+---------+--------+-------+--------------+--------------+-------------+------------+------------+-----------+
+12 rows in set (0.00 sec)
+
+mysql> select concat(fname ,' ', lname) as 'Tenured Faculty'
+    -> from faculty
+    -> where salary > 80000;
++-----------------+
+| Tenured Faculty |
++-----------------+
+| Dean Joans      |
+| Sean Shepard    |
+| Eric Jackson    |
+| Gary Holmes     |
+| Davis Carr      |
+| James Davidson  |
+| Rahul Singh     |
+| Laxmi Iyer      |
+| She Yu          |
++-----------------+
+9 rows in set (0.00 sec)
+
+mysql> select concat(fname ,' ', lname) as 'Non-Teaching Faculty Members'
+    -> from faculty f
+    -> left join course c
+    -> on (f.facultyid = c.facultyid)
+    -> where courseid is null;
++------------------------------+
+| Non-Teaching Faculty Members |
++------------------------------+
+| Davis Carr                   |
+| James Davidson               |
+| Rahul Singh                  |
++------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select coursename as "Professor Joans and Singh's Courses",
+    -> description Description
+    -> from faculty f
+    -> join course c
+    -> on (f.facultyid = c.facultyid)
+    -> where fname in ('Raul', 'Dean')
+    -> and lname in ('Singh', 'Joans')
+    -> order by coursename;
++-------------------------------------+-------------+
+| Professor Joans and Singh's Courses | Description |
++-------------------------------------+-------------+
+| Database Design                     | Programming |
+| Java                                | Programming |
++-------------------------------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select departmentname DepartmentName
+    -> from department
+    -> where departmentid in (52, 53, 54);
++--------------------------+
+| DepartmentName           |
++--------------------------+
+| Information Organization |
+| Information Policy       |
+| Information Management   |
++--------------------------+
+3 rows in set (0.00 sec)
+
+mysql> select salary as 'Faculty Salary'
+    -> from faculty
+    -> order by salary desc;
++----------------+
+| Faculty Salary |
++----------------+
+|      115000.00 |
+|      110000.00 |
+|      100000.00 |
+|       98000.00 |
+|       90000.00 |
+|       87000.00 |
+|       87000.00 |
+|       85000.00 |
+|       81000.00 |
+|       77000.00 |
+|       61000.00 |
+|       57000.00 |
++----------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat(fname, ' ', lname) NAME,
+    -> departmentname AFFILIATION,
+    -> datehired as 'DATE JOINED'
+    -> from faculty f
+    -> join department d
+    -> on (f.departmentid = d.departmentid)
+    -> where datehired between '2000-01-01' and '2004-12-31';
++--------------+--------------------------+-------------+
+| NAME         | AFFILIATION              | DATE JOINED |
++--------------+--------------------------+-------------+
+| Davis Carr   | Information Organization | 2003-08-20  |
+| Sean Shepard | Information Management   | 2000-08-22  |
+| Rahul Singh  | Information Ethics       | 2002-08-19  |
++--------------+--------------------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select coursename COURSE,
+    -> location CLASSROOM
+    -> from course
+    -> where location like 'A1%';
++------------+-----------+
+| COURSE     | CLASSROOM |
++------------+-----------+
+| Java       | A104      |
+| Web Design | A102      |
++------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select min(salary) 'Lowest Salary'
+    -> from faculty;
++---------------+
+| Lowest Salary |
++---------------+
+|      57000.00 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select title 'Faculty Titles', count(*) Total
+    -> from faculty
+    -> group by title;
++----------------+-------+
+| Faculty Titles | Total |
++----------------+-------+
+| Assoc Prof     |     4 |
+| Asst Prof      |     3 |
+| Lect           |     2 |
+| Prof           |     3 |
++----------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select concat(fname, ' ', lname) as 'Lowest Paid Faculty Member',
+    -> round(salary/12,2) as 'Monthly Salary'
+    -> from faculty
+    -> where salary = (select min(salary) from faculty);
++----------------------------+----------------+
+| Lowest Paid Faculty Member | Monthly Salary |
++----------------------------+----------------+
+| Thomas Johnson             |        4750.00 |
++----------------------------+----------------+
+1 row in set (0.02 sec)
+
+mysql> select departmentname Department,
+    -> sum(salary) as 'Annual Budget'
+    -> from department d
+    -> left join faculty f
+    -> on (d.departmentid = f.departmentid)
+    -> group by d.departmentid;
++--------------------------+---------------+
+| Department               | Annual Budget |
++--------------------------+---------------+
+| Archival Studies         |          NULL |
+| Information Retrieval    |      81000.00 |
+| Information Organization |      87000.00 |
+| Information Policy       |      61000.00 |
+| Information Management   |      90000.00 |
+| Information Security     |      57000.00 |
+| Information Technology   |      85000.00 |
+| Information Design       |     325000.00 |
+| Health Informatics       |     164000.00 |
+| Information Ethics       |      98000.00 |
++--------------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> select *
+    -> from faculty f
+    -> join department d
+    -> on (f.departmentid = d.departmentid);
++-----------+-----------+---------+--------+-------+--------------+--------------+-------------+------------+------------+-----------+--------------+--------------------------+----------+-------+---------+
+| FacultyID | LName     | FName   | Office | Phone | Email        | DepartmentID | DateOfBirth | DateHired  | Title      | Salary    | DepartmentID | DepartmentName           | Location | Phone | Chair   |
++-----------+-----------+---------+--------+-------+--------------+--------------+-------------+------------+------------+-----------+--------------+--------------------------+----------+-------+---------+
+|      1245 | Iyer      | Laxmi   | C211   | 5447  | lmn@sois.edu |           51 | 1974-05-06  | 2008-08-22 | Asst Prof  |  81000.00 |           51 | Information Retrieval    | B431     | 4222  | Sheela  |
+|      1239 | Carr      | Davis   | C411   | 5437  | fgh@sois.edu |           52 | 1972-03-15  | 2003-08-20 | Assoc Prof |  87000.00 |           52 | Information Organization | B410     | 4223  | Craig   |
+|      1241 | Dickson   | Sandy   | C145   | 5443  | hij@sois.edu |           53 | 1982-05-02  | 2010-03-01 | Lect       |  61000.00 |           53 | Information Policy       | B204     | 4324  | Michael |
+|      1235 | Shepard   | Sean    | C334   | 5433  | bcd@sois.edu |           54 | 1973-01-01  | 2000-08-22 | Assoc Prof |  90000.00 |           54 | Information Management   | B219     | 4325  | Chris   |
+|      1237 | Johnson   | Thomas  | C531   | 5435  | def@sois.edu |           55 | 1982-11-14  | 2010-01-24 | Lect       |  57000.00 |           55 | Information Security     | B225     | 4332  | Steve   |
+|      1246 | Yu        | She     | C987   | 5448  | mno@sois.edu |           56 | 1981-11-26  | 2010-08-20 | Asst Prof  |  85000.00 |           56 | Information Technology   | B336     | 4333  | Arthur  |
+|      1234 | Joans     | Dean    | C234   | 5432  | abc@sois.edu |           57 | 1974-04-11  | 1995-08-20 | Prof       | 110000.00 |           57 | Information Design       | B300     | 4334  | Amy     |
+|      1238 | Holmes    | Gary    | C313   | 5436  | efg@sois.edu |           57 | 1977-10-04  | 1996-08-24 | Prof       | 100000.00 |           57 | Information Design       | B300     | 4334  | Amy     |
+|      1242 | Davidson  | James   | C245   | 5444  | ijk@sois.edu |           57 | 1979-02-25  | 1999-08-23 | Prof       | 115000.00 |           57 | Information Design       | B300     | 4334  | Amy     |
+|      1236 | Jackson   | Eric    | C123   | 5434  | cde@sois.edu |           58 | 1981-09-01  | 2007-08-21 | Assoc Prof |  87000.00 |           58 | Health Informatics       | B428     | 4330  | Ravi    |
+|      1240 | Robertson | Richard | C278   | 5442  | ghi@sois.edu |           58 | 1972-12-14  | 2011-08-21 | Asst Prof  |  77000.00 |           58 | Health Informatics       | B428     | 4330  | Ravi    |
+|      1244 | Singh     | Rahul   | C499   | 5446  | klm@sois.edu |           59 | 1979-10-31  | 2002-08-19 | Assoc Prof |  98000.00 |           59 | Information Ethics       | B356     | 4320  | Simon   |
++-----------+-----------+---------+--------+-------+--------------+--------------+-------------+------------+------------+-----------+--------------+--------------------------+----------+-------+---------+
+12 rows in set (0.00 sec)
+
+mysql> select concat(fname, ' ', lname) 'Faculty Name',
+    -> timestampdiff(year, datehired, current_date) 'Years of Service'
+    -> from faculty
+    -> where datehired < (select datehired from faculty where fname = 'Davis' and lname = 'Carr');
++----------------+------------------+
+| Faculty Name   | Years of Service |
++----------------+------------------+
+| Dean Joans     |               20 |
+| Sean Shepard   |               15 |
+| Gary Holmes    |               19 |
+| James Davidson |               16 |
+| Rahul Singh    |               13 |
++----------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> update faculty
+    -> set salary = round(salary+salary*0.04,2);
+Query OK, 12 rows affected (0.00 sec)
+Rows matched: 12  Changed: 12  Warnings: 0
+
+mysql> select concat(fname, ' ', lname) 'Faculty Name',
+    -> salary 'New Salary'
+    -> from faculty
+    -> order by salary desc;
++-------------------+------------+
+| Faculty Name      | New Salary |
++-------------------+------------+
+| James Davidson    |  119600.00 |
+| Dean Joans        |  114400.00 |
+| Gary Holmes       |  104000.00 |
+| Rahul Singh       |  101920.00 |
+| Sean Shepard      |   93600.00 |
+| Eric Jackson      |   90480.00 |
+| Davis Carr        |   90480.00 |
+| She Yu            |   88400.00 |
+| Laxmi Iyer        |   84240.00 |
+| Richard Robertson |   80080.00 |
+| Sandy Dickson     |   63440.00 |
+| Thomas Johnson    |   59280.00 |
++-------------------+------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat(fname, ' ', lname) 'Faculty Name',
+    -> count(c.facultyid) 'Number of Courses'
+    -> from faculty f
+    -> left join course c
+    -> on (f.facultyid = c.facultyid)
+    -> group by f.facultyid;
++-------------------+-------------------+
+| Faculty Name      | Number of Courses |
++-------------------+-------------------+
+| Dean Joans        |                 2 |
+| Sean Shepard      |                 1 |
+| Eric Jackson      |                 1 |
+| Thomas Johnson    |                 1 |
+| Gary Holmes       |                 1 |
+| Davis Carr        |                 0 |
+| Richard Robertson |                 1 |
+| Sandy Dickson     |                 1 |
+| James Davidson    |                 0 |
+| Rahul Singh       |                 0 |
+| Laxmi Iyer        |                 1 |
+| She Yu            |                 1 |
++-------------------+-------------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat(fname, ' ', lname) 'Faculty Name',
+    -> coursename CourseName
+    -> from faculty f
+    -> left join course c
+    -> on (f.facultyid = c.facultyid);
++-------------------+------------------+
+| Faculty Name      | CourseName       |
++-------------------+------------------+
+| Dean Joans        | Java             |
+| Dean Joans        | Database Design  |
+| Sean Shepard      | Systems Analysis |
+| Eric Jackson      | Security         |
+| Thomas Johnson    | Visual Basic     |
+| Gary Holmes       | E-Commerce       |
+| Davis Carr        | NULL             |
+| Richard Robertson | Fin. Accounting  |
+| Sandy Dickson     | Economics        |
+| James Davidson    | NULL             |
+| Rahul Singh       | NULL             |
+| Laxmi Iyer        | Web Design       |
+| She Yu            | Statistics       |
++-------------------+------------------+
+13 rows in set (0.00 sec)
+

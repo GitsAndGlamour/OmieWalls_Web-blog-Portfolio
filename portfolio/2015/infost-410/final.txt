@@ -1,0 +1,485 @@
+mysql> CREATE DATABASE LuckyTire;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> USE LuckyTire;
+Database changed
+
+/*----- QUESTION 1a -----*/
+
+mysql> CREATE TABLE Tire
+(TireID 		int 	PRIMARY KEY,
+ModelName 	varchar(25),
+Manufacturer 	varchar(20),
+UnitPrice 	decimal(5,2),
+Type 		varchar(12));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> DESCRIBE Tire;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| TireID       | int(11)      | NO   | PRI | NULL    |       |
+| ModelName    | varchar(25)  | YES  |     | NULL    |       |
+| Manufacturer | varchar(20)  | YES  |     | NULL    |       |
+| UnitPrice    | decimal(5,2) | YES  |     | NULL    |       |
+| Type         | varchar(12)  | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
+mysql> CREATE TABLE Customer
+(CID 		int 		PRIMARY KEY,
+FName 		char(20),
+LName 		char(20),
+ADDress 	varchar(40),
+City 		varchar(25),
+State 		varchar(2),
+Zip 		varchar(5),
+Phone 		varchar(14),
+Make 		varchar(15),
+Model 		varchar(20),
+Year 		int(4));
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> DESCRIBE Customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| CID     | int(11)     | NO   | PRI | NULL    |       |
+| FName   | char(20)    | YES  |     | NULL    |       |
+| LName   | char(20)    | YES  |     | NULL    |       |
+| ADDress | varchar(40) | YES  |     | NULL    |       |
+| City    | varchar(25) | YES  |     | NULL    |       |
+| State   | varchar(2)  | YES  |     | NULL    |       |
+| Zip     | varchar(5)  | YES  |     | NULL    |       |
+| Phone   | varchar(14) | YES  |     | NULL    |       |
+| Make    | varchar(15) | YES  |     | NULL    |       |
+| Model   | varchar(20) | YES  |     | NULL    |       |
+| Year    | int(4)      | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+11 rows in set (0.03 sec)
+
+mysql> CREATE TABLE Sales(
+InvoiceNumber 	int 	PRIMARY KEY,
+Date 		date,
+CID 		int,
+TireID 		int,
+Quantity 	int);
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> ALTER TABLE Sales
+ADD CONSTRAINT 	fk_Sales_cid
+FOREIGN KEY 		(CID)
+REFERENCES 	Customer(CID);
+Query OK, 0 rows affected (0.28 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Sales
+ADD CONSTRAINT 	fk_Sales_Tireid
+FOREIGN KEY 		(TireID)
+REFERENCES 	    Tire(TireID);
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Sales;
++---------------+---------+------+-----+---------+-------+
+| Field         | Type    | Null | Key | Default | Extra |
++---------------+---------+------+-----+---------+-------+
+| InvoiceNumber | int(11) | NO   | PRI | NULL    |       |
+| Date          | date    | YES  |     | NULL    |       |
+| CID           | int(11) | YES  | MUL | NULL    |       |
+| TireID        | int(11) | YES  | MUL | NULL    |       |
+| Quantity      | int(11) | YES  |     | NULL    |       |
++---------------+---------+------+-----+---------+-------+
+5 rows in set (0.08 sec)
+
+/*----- QUESTION 1b -----*/
+mysql> INSERT INTO Tire VALUES
+(01, 'Touring',    'Larson',    19.99, 'Passenger'),
+(02, 'Assurance',  'GoodTread', 24.99, 'Passenger'),
+(03, 'Heavy Duty', 'Dunlop',    29.99, 'Truck'),
+(04, 'Smooth',     'MRF',       25.49, 'SUV'),
+(05, 'Flash',      'Larson',    44.99, 'Van'),
+(06, 'Voyager',    'GoodTread', 35.50, 'SUV'),
+(07, 'Explorer',   'MRF',       40.00, 'Truck'),
+(08, 'Viking',     'AllStar',   30.99, 'SUV');
+Query OK, 8 rows affected (0.02 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> SELECT *
+       FROM Tire;
++--------+------------+--------------+-----------+-----------+
+| TireID | ModelName  | Manufacturer | UnitPrice | Type      |
++--------+------------+--------------+-----------+-----------+
+|      1 | Touring    | Larson       |     19.99 | Passenger |
+|      2 | Assurance  | GoodTread    |     24.99 | Passenger |
+|      3 | Heavy Duty | Dunlop       |     29.99 | Truck     |
+|      4 | Smooth     | MRF          |     25.49 | SUV       |
+|      5 | Flash      | Larson       |     44.99 | Van       |
+|      6 | Voyager    | GoodTread    |     35.50 | SUV       |
+|      7 | Explorer   | MRF          |     40.00 | Truck     |
+|      8 | Viking     | AllStar      |     30.99 | SUV       |
++--------+------------+--------------+-----------+-----------+
+8 rows in set (0.01 sec)
+
+mysql> INSERT INTO Customer VALUES
+(50125, 'Kevin', 	'Sullivan', 	'27 W G St #3', 		'Ontario', 	'CA', '91762', '909-555-0965', 'Ford', 		'F-150', 	2006),
+(50168, 'Pria', 	'Patel', 	'3394 N 6th St #3', 		'Upland', 	'CA', '91785', '909-555-1266', 'BMW', 		'325', 		2004),
+(50173, 'Will', 	'Leung', 	'6 Vincente Ave', 		'Claremont', 	'CA', '91711', '909-555-6603', 'Toyota', 	'Rav-4', 	2004),
+(50178, 'Angel', 	'Gonzales', 	'658 Benito St', 		'Ontario', 	'CA', '91764', '909-555-0997', 'Dodge', 	'Neon', 	2006),
+(50187, 'Mike', 	'Lee', 		'13756 Redwood Ave', 		'Chino', 	'CA', '91710', '909-555-4352', 'Toyota', 	'Prius', 	2008),
+(50193, 'Phan', 	'Khai', 	'67 N Ukiah Way', 		'Upland', 	'CA', '91786', '909-555-1236', 'Dodge', 	'Caravan', 	2007),
+(50197, 'Angel', 	'Lopez', 	'98 Sheridan St', 		'Upland', 	'CA', '91786', '909-555-3522', 'Chevrolet', 	'Silverado', 	2006),
+(50198, 'Luis', 	'Alvarez', 	'34 Kumquat Place', 		'Montclair', 	'CA', '91763', '909-555-2323', 'Toyota', 	'Camry', 	2008),
+(50201, 'Nguyen', 	'Cuong', 	'79 Coalinga Ave', 		'Montclair', 	'CA', '91763', '909-555-2135', 'Saturn', 	'Sky', 		2009),
+(50211, 'Sara', 	'Jackson', 	'5 Alamitos St', 		'Montclair', 	'CA', '91763', '909-555-8863', 'Chevrolet', 	'Silverado', 	2002),
+(50219, 'Daniel', 	'Saadi', 	'32 W Rosewood Ct', 		'Montclair', 	'CA', '91763', '909-555-2776', 'Ford', 		'Focus', 	2009),
+(50230, 'Ed', 		'Baig', 	'5687 E Walnut Ave', 		'Chino', 	'CA', '91710', '909-555-1032', 'Honda', 	'Accord', 	2004),
+(50231, 'Tony', 	'Guerrero', 	'12 N Jasmine Ave', 		'Montclair', 	'CA', '91763', '909-555-8701', 'Nissan',	'Sentra', 	2004),
+(50233, 'Anna', 	'Lim', 		'18 Winn Dr', 			'Upland', 	'CA', '91786', '909-555-1778', 'Honda', 	'Prelude', 	2002),
+(50234, 'Cathy', 	'Ng', 		'9088 Holt Blvd Apt #243', 	'Ontario', 	'CA', '91762', '909-555-1107', 'Honda', 	'Accord', 	2009),
+(50244, 'Cathy', 	'Lam', 		'4803 Granada Ct', 		'Chino', 	'CA', '91710', '909-555-0567', 'Chevrolet', 	'Corvette', 	2007),
+(50257, 'Juan', 	'Hernandez', 	'4255 San Vincente St', 	'Chino', 	'CA', '91710', '909-555-4435', 'Volkswagon', 	'Golf', 	2007),
+(50266, 'Sofia', 	'Garcia', 	'13 E La Deney Ct', 		'Ontario', 	'CA', '91764', '909-555-2783', 'Volkswagon', 	'Beetle', 	2005),
+(50273, 'Jennifer', 	'Kidd', 	'2321 San Berardino St', 	'Montclair', 	'CA', '91763', '909-555-2144', 'Suburu', 	'WRX', 		2008),
+(50295, 'Raj', 		'Malik', 	'25A W Princeton St', 		'Montclair', 	'CA', '91763', '909-555-0543', 'Dodge', 	'Durango', 	2008),
+(50323, 'Charlie', 	'Bahn', 	'18 Chaffee St', 		'Upland', 	'CA', '91786', '909-555-4448', 'Hyundai', 	'Elantra', 	2004),
+(50345, 'Angela', 	'Smith', 	'112 E 4th St', 		'Ontario', 	'CA', '91764', '909-555-2353', 'Honda', 	'Civic', 	2001),
+(50564, 'Maria', 	'Agbayani', 	'101 W E St', 			'Upland', 	'CA', '91762', '909-555-2161', 'Dodge', 	'Caravan', 	2007);
+Query OK, 23 rows affected (0.04 sec)
+Records: 23  Duplicates: 0  Warnings: 0
+
+mysql> SELECT *
+       FROM Customer;
++-------+----------+-----------+-------------------------+-----------+-------+-------+--------------+------------+-----------+------+
+| CID   | FName    | LName     | ADDress                 | City      | State | Zip   | Phone        | Make       | Model     | Year |
++-------+----------+-----------+-------------------------+-----------+-------+-------+--------------+------------+-----------+------+
+| 50125 | Kevin    | Sullivan  | 27 W G St #3            | Ontario   | CA    | 91762 | 909-555-0965 | Ford       | F-150     | 2006 |
+| 50168 | Pria     | Patel     | 3394 N 6th St #3        | Upland    | CA    | 91785 | 909-555-1266 | BMW        | 325       | 2004 |
+| 50173 | Will     | Leung     | 6 Vincente Ave          | Claremont | CA    | 91711 | 909-555-6603 | Toyota     | Rav-4     | 2004 |
+| 50178 | Angel    | Gonzales  | 658 Benito St           | Ontario   | CA    | 91764 | 909-555-0997 | Dodge      | Neon      | 2006 |
+| 50187 | Mike     | Lee       | 13756 Redwood Ave       | Chino     | CA    | 91710 | 909-555-4352 | Toyota     | Prius     | 2008 |
+| 50193 | Phan     | Khai      | 67 N Ukiah Way          | Upland    | CA    | 91786 | 909-555-1236 | Dodge      | Caravan   | 2007 |
+| 50197 | Angel    | Lopez     | 98 Sheridan St          | Upland    | CA    | 91786 | 909-555-3522 | Chevrolet  | Silverado | 2006 |
+| 50198 | Luis     | Alvarez   | 34 Kumquat Place        | Montclair | CA    | 91763 | 909-555-2323 | Toyota     | Camry     | 2008 |
+| 50201 | Nguyen   | Cuong     | 79 Coalinga Ave         | Montclair | CA    | 91763 | 909-555-2135 | Saturn     | Sky       | 2009 |
+| 50211 | Sara     | Jackson   | 5 Alamitos St           | Montclair | CA    | 91763 | 909-555-8863 | Chevrolet  | Silverado | 2002 |
+| 50219 | Daniel   | Saadi     | 32 W Rosewood Ct        | Montclair | CA    | 91763 | 909-555-2776 | Ford       | Focus     | 2009 |
+| 50230 | Ed       | Baig      | 5687 E Walnut Ave       | Chino     | CA    | 91710 | 909-555-1032 | Honda      | Accord    | 2004 |
+| 50231 | Tony     | Guerrero  | 12 N Jasmine Ave        | Montclair | CA    | 91763 | 909-555-8701 | Nissan     | Sentra    | 2004 |
+| 50233 | Anna     | Lim       | 18 Winn Dr              | Upland    | CA    | 91786 | 909-555-1778 | Honda      | Prelude   | 2002 |
+| 50234 | Cathy    | Ng        | 9088 Holt Blvd Apt #243 | Ontario   | CA    | 91762 | 909-555-1107 | Honda      | Accord    | 2009 |
+| 50244 | Cathy    | Lam       | 4803 Granada Ct         | Chino     | CA    | 91710 | 909-555-0567 | Chevrolet  | Corvette  | 2007 |
+| 50257 | Juan     | Hernandez | 4255 San Vincente St    | Chino     | CA    | 91710 | 909-555-4435 | Volkswagon | Golf      | 2007 |
+| 50266 | Sofia    | Garcia    | 13 E La Deney Ct        | Ontario   | CA    | 91764 | 909-555-2783 | Volkswagon | Beetle    | 2005 |
+| 50273 | Jennifer | Kidd      | 2321 San Berardino St   | Montclair | CA    | 91763 | 909-555-2144 | Suburu     | WRX       | 2008 |
+| 50295 | Raj      | Malik     | 25A W Princeton St      | Montclair | CA    | 91763 | 909-555-0543 | Dodge      | Durango   | 2008 |
+| 50323 | Charlie  | Bahn      | 18 Chaffee St           | Upland    | CA    | 91786 | 909-555-4448 | Hyundai    | Elantra   | 2004 |
+| 50345 | Angela   | Smith     | 112 E 4th St            | Ontario   | CA    | 91764 | 909-555-2353 | Honda      | Civic     | 2001 |
+| 50564 | Maria    | Agbayani  | 101 W E St              | Upland    | CA    | 91762 | 909-555-2161 | Dodge      | Caravan   | 2007 |
++-------+----------+-----------+-------------------------+-----------+-------+-------+--------------+------------+-----------+------+
+23 rows in set (0.00 sec)
+
+mysql> INSERT INTO Sales VALUES
+(77340, '2010-5-5', 50173, 03, 1), 
+(77341, '2010-5-5', 50211, 04, 1), 
+(77342, '2010-5-6', 50345, 02, 4), 
+(77343, '2010-5-6', 50231, 05, 2), 
+(77344, '2010-5-6', 50168, 06, 1), 
+(77345, '2010-5-6', 50125, 07, 1), 
+(77346, '2010-5-7', 50233, 04, 4), 
+(77347, '2010-5-8', 50198, 02, 4), 
+(77348, '2010-5-9', 50244, 06, 1), 
+(77349, '2010-5-10', 50178, 02, 4),
+(77350, '2010-5-10', 50273, 03, 1), 
+(77351, '2010-5-10', 50125, 07, 2), 
+(77352, '2010-5-10', 50187, 03, 3), 
+(77353, '2010-5-10', 50564, 01, 2), 
+(77354, '2010-5-10', 50266, 05, 2), 
+(77355, '2010-5-12', 50211, 04, 1), 
+(77356, '2010-5-13', 50168, 06, 1), 
+(77357, '2010-5-13', 50168, 06, 1), 
+(77358, '2010-5-15', 50173, 03, 1), 
+(77359, '2010-5-16', 50187, 05, 1), 
+(77360, '2010-5-16', 50193, 03, 3), 
+(77361, '2010-5-16', 50197, 07, 1), 
+(77362, '2010-5-17', 50201, 05, 2), 
+(77363, '2010-5-17', 50201, 07, 2), 
+(77364, '2010-5-17', 50219, 01, 2), 
+(77365, '2010-5-17', 50219, 01, 2), 
+(77366, '2010-5-17', 50230, 02, 2), 
+(77367, '2010-5-17', 50234, 03, 1), 
+(77368, '2010-5-19', 50234, 04, 3), 
+(77369, '2010-5-19', 50257, 05, 1), 
+(77370, '2010-5-21', 50295, 05, 4), 
+(77371, '2010-5-22', 50323, 04, 1);
+Query OK, 32 rows affected (0.03 sec)
+Records: 32  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * 
+       FROM Sales;
++---------------+------------+-------+--------+----------+
+| InvoiceNumber | Date       | CID   | TireID | Quantity |
++---------------+------------+-------+--------+----------+
+|         77340 | 2010-05-05 | 50173 |      3 |        1 |
+|         77341 | 2010-05-05 | 50211 |      4 |        1 |
+|         77342 | 2010-05-06 | 50345 |      2 |        4 |
+|         77343 | 2010-05-06 | 50231 |      5 |        2 |
+|         77344 | 2010-05-06 | 50168 |      6 |        1 |
+|         77345 | 2010-05-06 | 50125 |      7 |        1 |
+|         77346 | 2010-05-07 | 50233 |      4 |        4 |
+|         77347 | 2010-05-08 | 50198 |      2 |        4 |
+|         77348 | 2010-05-09 | 50244 |      6 |        1 |
+|         77349 | 2010-05-10 | 50178 |      2 |        4 |
+|         77350 | 2010-05-10 | 50273 |      3 |        1 |
+|         77351 | 2010-05-10 | 50125 |      7 |        2 |
+|         77352 | 2010-05-10 | 50187 |      3 |        3 |
+|         77353 | 2010-05-10 | 50564 |      1 |        2 |
+|         77354 | 2010-05-10 | 50266 |      5 |        2 |
+|         77355 | 2010-05-12 | 50211 |      4 |        1 |
+|         77356 | 2010-05-13 | 50168 |      6 |        1 |
+|         77357 | 2010-05-13 | 50168 |      6 |        1 |
+|         77358 | 2010-05-15 | 50173 |      3 |        1 |
+|         77359 | 2010-05-16 | 50187 |      5 |        1 |
+|         77360 | 2010-05-16 | 50193 |      3 |        3 |
+|         77361 | 2010-05-16 | 50197 |      7 |        1 |
+|         77362 | 2010-05-17 | 50201 |      5 |        2 |
+|         77363 | 2010-05-17 | 50201 |      7 |        2 |
+|         77364 | 2010-05-17 | 50219 |      1 |        2 |
+|         77365 | 2010-05-17 | 50219 |      1 |        2 |
+|         77366 | 2010-05-17 | 50230 |      2 |        2 |
+|         77367 | 2010-05-17 | 50234 |      3 |        1 |
+|         77368 | 2010-05-19 | 50234 |      4 |        3 |
+|         77369 | 2010-05-19 | 50257 |      5 |        1 |
+|         77370 | 2010-05-21 | 50295 |      5 |        4 |
+|         77371 | 2010-05-22 | 50323 |      4 |        1 |
++---------------+------------+-------+--------+----------+
+32 rows in set (0.00 sec)
+
+/*----- QUESTION 2 -----*/
+mysql> INSERT INTO Tire
+       (TireID, ModelName, Manufacturer, UnitPrice, Type)
+       VALUES (09, 'LXR213', 'Ceat', 45.50, 'SUV');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT *
+       FROM Tire
+       WHERE TireID = 09;
++--------+-----------+--------------+-----------+------+
+| TireID | ModelName | Manufacturer | UnitPrice | Type |
++--------+-----------+--------------+-----------+------+
+|      9 | LXR213    | Ceat         |     45.50 | SUV  |
++--------+-----------+--------------+-----------+------+
+1 row in set (0.02 sec)
+
+/*----- QUESTION 3 -----*/
+mysql> UPDATE Customer
+       SET   Phone = '515-555-9981'
+       WHERE FName = 'Mike'
+       AND   LNAME = 'Lee';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Customer
+       SET Address = '1010 W E St #403'
+       WHERE FName = 'Maria'
+       AND   LName = 'Agbayani';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT *
+       FROM Customer
+       WHERE Phone = '515-555-9981'
+       OR Address  = '1010 W E St #403';
++-------+-------+----------+-------------------+--------+-------+-------+--------------+--------+---------+------+
+| CID   | FName | LName    | Address           | City   | State | Zip   | Phone        | Make   | Model   | Year |
++-------+-------+----------+-------------------+--------+-------+-------+--------------+--------+---------+------+
+| 50187 | Mike  | Lee      | 13756 Redwood Ave | Chino  | CA    | 91710 | 515-555-9981 | Toyota | Prius   | 2008 |
+| 50564 | Maria | Agbayani | 1010 W E St #403  | Upland | CA    | 91762 | 909-555-2161 | Dodge  | Caravan | 2007 |
++-------+-------+----------+-------------------+--------+-------+-------+--------------+--------+---------+------+
+2 rows in set (0.00 sec)
+
+/*----- QUESTION 4 -----*/
+mysql> SELECT City, COUNT(*) '# of Customers'
+       FROM Customer
+       GROUP BY City
+       HAVING COUNT(*) >= 2;
++-----------+----------------+
+| City      | # of Customers |
++-----------+----------------+
+| Chino     |              4 |
+| Montclair |              7 |
+| Ontario   |              5 |
+| Upland    |              6 |
++-----------+----------------+
+4 rows in set (0.02 sec)
+
+/*----- QUESTION 5 -----*/
+mysql> SELECT InvoiceNumber 			'Invoice No.', 
+              DATE_FORMAT(Date, '%Y/%d/%m') 	'Date', 
+              CID 				'Customer No.', 
+	      TireID 				'Tire No.', 
+              Quantity
+       FROM Sales
+       WHERE TireID NOT IN (01, 03, 05, 07);
++-------------+------------+--------------+----------+----------+
+| Invoice No. | Date       | Customer No. | Tire No. | Quantity |
++-------------+------------+--------------+----------+----------+
+|       77341 | 2010/05/05 |        50211 |        4 |        1 |
+|       77342 | 2010/06/05 |        50345 |        2 |        4 |
+|       77344 | 2010/06/05 |        50168 |        6 |        1 |
+|       77346 | 2010/07/05 |        50233 |        4 |        4 |
+|       77347 | 2010/08/05 |        50198 |        2 |        4 |
+|       77348 | 2010/09/05 |        50244 |        6 |        1 |
+|       77349 | 2010/10/05 |        50178 |        2 |        4 |
+|       77355 | 2010/12/05 |        50211 |        4 |        1 |
+|       77356 | 2010/13/05 |        50168 |        6 |        1 |
+|       77357 | 2010/13/05 |        50168 |        6 |        1 |
+|       77366 | 2010/17/05 |        50230 |        2 |        2 |
+|       77368 | 2010/19/05 |        50234 |        4 |        3 |
+|       77371 | 2010/22/05 |        50323 |        4 |        1 |
++-------------+------------+--------------+----------+----------+
+13 rows in set (0.00 sec)
+
+/*----- QUESTION 6 -----*/
+mysql> SELECT City, COUNT(*) 'Number of Customers'
+       FROM Customer
+       GROUP BY City;
++-----------+---------------------+
+| City      | Number of Customers |
++-----------+---------------------+
+| Chino     |                   4 |
+| Claremont |                   1 |
+| Montclair |                   7 |
+| Ontario   |                   5 |
+| Upland    |                   6 |
++-----------+---------------------+
+5 rows in set (0.00 sec)
+
+/*----- QUESTION 7 -----*/
+mysql> SELECT CONCAT(FName, ' ', LName) 'Honda Customers'
+       FROM Customer
+       WHERE Make = (SELECT Make 
+                     FROM Customer 
+		     WHERE FName = 'Cathy' 
+                     AND   LName = 'Ng');
++-----------------+
+| Honda Customers |
++-----------------+
+| Ed Baig         |
+| Anna Lim        |
+| Cathy Ng        |
+| Angela Smith    |
++-----------------+
+4 rows in set (0.00 sec)
+
+/*----- QUESTION 8 -----*/
+mysql> SELECT CONCAT(FName, ' ', LName) 'Ontario Customers', 
+	      Phone 			'Contact Numbers'
+       FROM  Customer
+       Where City = 'Ontario'
+       ORDER BY FName, LName;
++-------------------+-----------------+
+| Ontario Customers | Contact Numbers |
++-------------------+-----------------+
+| Angel Gonzales    | 909-555-0997    |
+| Angela Smith      | 909-555-2353    |
+| Cathy Ng          | 909-555-1107    |
+| Kevin Sullivan    | 909-555-0965    |
+| Sofia Garcia      | 909-555-2783    |
++-------------------+-----------------+
+5 rows in set (0.00 sec)
+
+/*----- QUESTION 9 -----*/
+mysql> SELECT Manufacturer 		'Tire Maker', 
+              SUM(Quantity*UnitPrice)  	'Earnings'
+       FROM  Tire t, 	Sales s
+       WHERE t.TireID = s.TireID
+       GROUP BY Manufacturer
+       ORDER BY Manufacturer;
++------------+----------+
+| Tire Maker | Earnings |
++------------+----------+
+| Dunlop     |   299.90 |
+| GoodTread  |   491.86 |
+| Larson     |   659.82 |
+| MRF        |   494.90 |
++------------+----------+
+4 rows in set (0.00 sec)
+
+/*----- QUESTION 10 -----*/
+mysql> SELECT CONCAT(FName, ' ', LName) 'Assurance Tire Customers', 
+    	      Address 			'Street Address', 
+	      City, 
+	      Zip 			'Zip Code'
+       FROM  Customer c, Sales s
+       WHERE c.CID  = s.CID
+       AND   TireID = 02;
++--------------------------+-------------------+-----------+----------+
+| Assurance Tire Customers | Street Address    | City      | Zip Code |
++--------------------------+-------------------+-----------+----------+
+| Angela Smith             | 112 E 4th St      | Ontario   | 91764    |
+| Luis Alvarez             | 34 Kumquat Place  | Montclair | 91763    |
+| Angel Gonzales           | 658 Benito St     | Ontario   | 91764    |
+| Ed Baig                  | 5687 E Walnut Ave | Chino     | 91710    |
++--------------------------+-------------------+-----------+----------+
+4 rows in set (0.00 sec)
+
+/*----- SECTION 2 -----*/
+
+/*- OPTIONAL QUESTION 1 -*/
+mysql> CREATE TABLE Copy_Tire
+       AS (SELECT * 
+	   FROM Tire);
+Query OK, 9 rows affected (0.15 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> DELETE FROM Copy_Tire
+       WHERE TireID = 08;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT *
+       FROM  Copy_Tire
+       WHERE TireID BETWEEN 07 AND 09;
++--------+-----------+--------------+-----------+-------+
+| TireID | ModelName | Manufacturer | UnitPrice | Type  |
++--------+-----------+--------------+-----------+-------+
+|      7 | Explorer  | MRF          |     40.00 | Truck |
+|      9 | LXR213    | Ceat         |     45.50 | SUV   |
++--------+-----------+--------------+-----------+-------+
+
+
+/*- OPTIONAL QUESTION 2 -*/
+mysql> SELECT *
+       FROM 	  Tire t
+       INNER JOIN Sales s
+       ON   (t.TireID = s.TireID)
+       WHERE t.TireID BETWEEN 01 AND 05;
++--------+------------+--------------+-----------+-----------+---------------+------------+-------+--------+----------+
+| TireID | ModelName  | Manufacturer | UnitPrice | Type      | InvoiceNumber | Date       | CID   | TireID | Quantity |
++--------+------------+--------------+-----------+-----------+---------------+------------+-------+--------+----------+
+|      1 | Touring    | Larson       |     19.99 | Passenger |         77353 | 2010-05-10 | 50564 |      1 |        2 |
+|      1 | Touring    | Larson       |     19.99 | Passenger |         77364 | 2010-05-17 | 50219 |      1 |        2 |
+|      1 | Touring    | Larson       |     19.99 | Passenger |         77365 | 2010-05-17 | 50219 |      1 |        2 |
+|      2 | Assurance  | GoodTread    |     24.99 | Passenger |         77342 | 2010-05-06 | 50345 |      2 |        4 |
+|      2 | Assurance  | GoodTread    |     24.99 | Passenger |         77347 | 2010-05-08 | 50198 |      2 |        4 |
+|      2 | Assurance  | GoodTread    |     24.99 | Passenger |         77349 | 2010-05-10 | 50178 |      2 |        4 |
+|      2 | Assurance  | GoodTread    |     24.99 | Passenger |         77366 | 2010-05-17 | 50230 |      2 |        2 |
+|      3 | Heavy Duty | Dunlop       |     29.99 | Truck     |         77340 | 2010-05-05 | 50173 |      3 |        1 |
+|      3 | Heavy Duty | Dunlop       |     29.99 | Truck     |         77350 | 2010-05-10 | 50273 |      3 |        1 |
+|      3 | Heavy Duty | Dunlop       |     29.99 | Truck     |         77352 | 2010-05-10 | 50187 |      3 |        3 |
+|      3 | Heavy Duty | Dunlop       |     29.99 | Truck     |         77358 | 2010-05-15 | 50173 |      3 |        1 |
+|      3 | Heavy Duty | Dunlop       |     29.99 | Truck     |         77360 | 2010-05-16 | 50193 |      3 |        3 |
+|      3 | Heavy Duty | Dunlop       |     29.99 | Truck     |         77367 | 2010-05-17 | 50234 |      3 |        1 |
+|      4 | Smooth     | MRF          |     25.49 | SUV       |         77341 | 2010-05-05 | 50211 |      4 |        1 |
+|      4 | Smooth     | MRF          |     25.49 | SUV       |         77346 | 2010-05-07 | 50233 |      4 |        4 |
+|      4 | Smooth     | MRF          |     25.49 | SUV       |         77355 | 2010-05-12 | 50211 |      4 |        1 |
+|      4 | Smooth     | MRF          |     25.49 | SUV       |         77368 | 2010-05-19 | 50234 |      4 |        3 |
+|      4 | Smooth     | MRF          |     25.49 | SUV       |         77371 | 2010-05-22 | 50323 |      4 |        1 |
+|      5 | Flash      | Larson       |     44.99 | Van       |         77343 | 2010-05-06 | 50231 |      5 |        2 |
+|      5 | Flash      | Larson       |     44.99 | Van       |         77354 | 2010-05-10 | 50266 |      5 |        2 |
+|      5 | Flash      | Larson       |     44.99 | Van       |         77359 | 2010-05-16 | 50187 |      5 |        1 |
+|      5 | Flash      | Larson       |     44.99 | Van       |         77362 | 2010-05-17 | 50201 |      5 |        2 |
+|      5 | Flash      | Larson       |     44.99 | Van       |         77369 | 2010-05-19 | 50257 |      5 |        1 |
+|      5 | Flash      | Larson       |     44.99 | Van       |         77370 | 2010-05-21 | 50295 |      5 |        4 |
++--------+------------+--------------+-----------+-----------+---------------+------------+-------+--------+----------+
+24 rows in set (0.00 sec)
