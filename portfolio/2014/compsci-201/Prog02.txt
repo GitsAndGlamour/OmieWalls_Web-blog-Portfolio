@@ -1,0 +1,25 @@
+/* Omie Walls
+ * February 4th, 2014
+ * COMPSCI 201-401
+ * Program 02
+ */
+public class Prog02
+{
+	public static void main(String[] args)
+	{
+		double length = 7;
+		double width = 9.5;
+		double height = 8.25;
+		
+		String i = "inches";
+		
+		double volume = length * width * height;
+		
+		System.out.println("Given a length of " + length + " " + i);
+		System.out.println("a width of " + width + " " + i);
+		System.out.println("and a height of " + height + " " + i);
+		System.out.println();
+		System.out.println("The box's volume is : " + volume + " " + i + " squared.");
+		
+	}
+}

@@ -1,0 +1,29 @@
+
+/*
+Omie Walls
+CompSci 201-401 Intro to Computer Programming
+Program 01
+02/02/2014 15:24
+*/
+public class First {
+	public static void main (String[] args)
+	{
+		System.out.println("INFOST-110: Intro to Information Science (3 Credits)\t"
+						 + "Lecture 001 11:00-12:15 MW Lapham 260");
+		System.out.println();
+		System.out.println("COMPSCI-201: Intro to Computer Programming (3 Credits)\t"
+						 + "Lecture 401 1:00-1:50 MW EMS E180");
+		System.out.println();
+		System.out.println("INFOST-230: Organization of Knowledge (3 Credits)\t"
+						 + "Lecture 003 3:30-4:45 MW NWQ 6590");
+		System.out.println();
+		System.out.println("COMPSCI-201: Intro to Computer Programming (3 Credits)\t"
+						 + "Laboratory 801 11:00-12:45 T EMS W130");
+		System.out.println();
+		System.out.println("INFOST-210: Info Resources for Research (3 Credits)\t"
+						 + "Lecture 003 3:30-4:45 TR NWQ 6590");
+		System.out.println();
+		System.out.println("INFOST-240: Information Architecture I (3 Credits)\t"
+						 + "Lecture 201 Online");
+	}
+}

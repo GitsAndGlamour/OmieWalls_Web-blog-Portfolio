@@ -1,0 +1,135 @@
+import java.util.Scanner;
+public class Prog11 {
+	
+	public static void main(String[]args){
+		Scanner stdIn = new Scanner(System.in);
+		String word;
+		int numWords=0;
+		int maxWords=0;
+		String [] words; 
+		
+		do{
+		System.out.print("Enter the amount of words to add to the wordList (minimum of 1): ");
+		maxWords = stdIn.nextInt();
+		}
+		while(maxWords<=0);
+		words = new String[maxWords];
+		while(numWords>=0){
+		switch(getMenuChoice()){
+		case 1:{
+			System.out.print("Enter a word to add to the wordList: ");
+			word = stdIn.next();
+			boolean add=addWord(words, numWords, word);
+			if(add && numWords==maxWords){
+				System.out.println("Maximum number of entries reached. \nRemove an existing word to add  to the wordList.");
+			}
+			else if (add){
+				words[numWords]=word;
+				++numWords;
+				System.out.println(word + " has been added.");
+			}
+			else if (add==false)
+				System.out.println(word + " is already present.");
+			break;
+		}
+		case 2:{
+			System.out.print("Enter a word to remove from the wordList: ");
+			word = stdIn.next();
+			boolean remove=removeWord(words, numWords, word);
+			if (remove){
+				for(int i=0; i<numWords-1; ++i){
+					for(int j=i+1; j<numWords; ++j){
+					if(words[i]==null){
+						words[i]=words[j];
+						words[j]=words[++j];
+					}
+					}
+				}
+				--numWords;
+				System.out.println(word + " has been removed.");
+			}
+			else if(remove==false)
+				System.out.println(word + " is not present.");
+			break;
+		}
+		case 3:{
+			printWords(words, numWords);
+			break;
+		}
+		case 4:{
+			return;
+		}
+		}
+		}
+		
+		
+		
+	}
+	public static boolean addWord(String[] words, int numWords, String word){
+		int index=findWord(words, numWords, word);
+		if(index>=0)
+		return false;
+		else
+			return true;
+		
+	}
+	public static boolean removeWord(String[] words, int numWords, String word){
+		int index=findWord(words, numWords, word);
+		if(index>=0){
+			words[index]=null;
+			return true;}
+		else
+		return false; 
+	}
+	public static void printWords(String[] words, int numWords){
+		sortWords(words, numWords);
+		System.out.print("[");
+		for(int i = 0; i < numWords; ++i){
+			if(words[i]==words[numWords-1])
+				System.out.print(words[i]);
+			else
+			System.out.print(words[i] + ", ");
+		}
+		System.out.print("]");
+		System.out.println();
+	}
+	private static int findWord(String[] words, int numWords, String word){
+		int index=0;
+		for(int i = 0; i<words.length; ++i){
+			if(word.equalsIgnoreCase(words[i])){
+				return i; 
+			}
+			else{
+				--index;
+			}
+		
+		}
+		return index;
+	}
+	public static void sortWords(String[] words, int numWords){
+		for(int i = 0; i < numWords-1; i++){
+			for(int j = i+1; j < numWords; j++){
+				if(words[i].compareToIgnoreCase(words[j])>0){
+					String temp = words[i];
+					words[i]    = words[j]; 
+					words[j]    = temp; 
+				}
+			}
+		}
+	}
+	private static int getMenuChoice(){
+		int menuChoice;
+		Scanner stdIn = new Scanner(System.in);
+		
+		System.out.print("1. Add Word\n"
+							+ "2. Remove Word\n"
+							+ "3. Print Word\n"
+							+ "4. Quit\n");
+		do{
+		System.out.print("Choose a menuChoice(1-4): ");
+		menuChoice = stdIn.nextInt();
+		}
+		while(menuChoice<1 ||  menuChoice>4);
+		return menuChoice; 
+	}
+}

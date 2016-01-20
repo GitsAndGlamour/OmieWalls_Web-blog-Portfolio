@@ -1,0 +1,70 @@
+
+import java.util.Scanner;
+public class Prog05 
+{
+	public static void main(String[] args)
+	{
+		Scanner operand = new Scanner(System.in);
+		double left = 0.0;
+		double right = 0.0;
+		double total = 0.0;
+		int op = 0;
+		
+		System.out.print("Enter the left operand : ");
+		left = operand.nextDouble();
+		System.out.print("Enter the right operand : ");
+		right = operand.nextDouble();
+		
+		while(op!=1 && op!=2 && op!=3 && op!=4)
+		{
+			System.out.println("---------------------------------------------");
+			System.out.println("1 -> Multiplication");
+			System.out.println("2 -> Division");
+			System.out.println("3 -> Addition");
+			System.out.println("4 -> Subtraction");
+			System.out.println("---------------------------------------------");
+			System.out.print("Choose an operator from the above menu : ");
+		
+			op = operand.nextInt();
+			
+			switch(op)
+			{
+				case 1:
+				{
+					total = left * right;
+					System.out.println("---------------------------------------------");
+					System.out.print(left + " * " + right + " = " + total);
+				}
+				break;
+				case 2:
+				{
+					total = left / right;
+					System.out.println("---------------------------------------------");
+					System.out.print(left + " / " + right + " = " + total);
+				}
+				break;
+				case 3:
+				{
+					total = left + right;
+					System.out.println("---------------------------------------------");
+					System.out.print(left + " + " + right + " = " + total);
+				}
+				break;
+				case 4:	
+				{
+					total = left - right;
+					System.out.println("---------------------------------------------");
+					System.out.print(left + " - " + right + " = " + total);
+				}
+				break;
+				default:
+				{
+					System.out.println("---------------------------------------------");
+					System.out.println("Invalid Input. Please Try again. ");
+				}
+				break;
+			}
+		}
+		operand.close();
+	}
+}

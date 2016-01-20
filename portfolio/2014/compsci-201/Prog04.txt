@@ -1,0 +1,35 @@
+import java.util.Scanner;
+public class Prog04
+{
+	public static void main(String [] args)
+	{
+		Scanner Combination = new Scanner(System.in);
+		
+		System.out.print("Please enter the lock code: ");
+		String lock_code = Combination.nextLine();
+		int lcl = lock_code.length();
+		int s0 = lock_code.charAt(0); 
+		boolean b0 = (s0 >= '0' && s0 <= '9');
+		int s1 = lock_code.charAt(0); 
+		boolean b1 = (s1 >= '0' && s1 <= '9');
+		int s3 = lock_code.charAt(0); 
+		boolean b3 = (s3 >= '0' && s3 <= '9');
+		int s4 = lock_code.charAt(0); 
+		boolean b4 = (s4 >= '0' && s4 <= '9');
+		int s6 = lock_code.charAt(0); 
+		boolean b6 = (s6 >= '0' && s6 <= '9');
+		int s7 = lock_code.charAt(0); 
+		boolean b7 = (s7 >= '0' && s7 <= '9');
+		
+		if(lcl==9 && lock_code.charAt(2)==('R') && lock_code.charAt(5)==('L') && lock_code.charAt(8)==('R') && b0==true && b1==true && b3==true && b4==true && b6==true && b7==true)
+		{		
+			System.out.print("This combination is valid!");
+		}
+		else
+		{
+			System.out.print("This combination (" + lock_code + ") is not valid!");
+		}
+		
+		Combination.close();
+	}
+}

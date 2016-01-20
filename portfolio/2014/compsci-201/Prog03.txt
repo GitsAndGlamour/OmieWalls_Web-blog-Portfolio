@@ -1,0 +1,48 @@
+/*Omie Walls
+ * February 13, 2014
+ * CS 201-401
+ * Program 03
+ */
+import java.util.Scanner;
+public class Prog03 
+{
+	public static void main(String[] args)
+	{
+		Scanner stdIn = new Scanner(System.in);
+		String f = ("Pitcher's first name: ");
+		String l = ("Pitcher's last name: ");
+		String r = ("Number of earned runs: ");
+		String i = ("Number of innings pitched: ");
+		String a = (" has an ERA of ");		
+		String s = (" "); // Best idea I've ever spawned from being lazy
+		String fn;
+		String ln;
+		float er;
+		float ip;
+		float era;
+		
+		System.out.print(f);
+		fn = stdIn.nextLine();
+		System.out.print(l);
+		ln = stdIn.nextLine();
+		System.out.print(r);
+		er = stdIn.nextInt();
+		System.out.print(i);
+		ip = stdIn.nextInt();
+		era = er * 9 / ip;
+		System.out.println(fn + s + ln + a + s + era);
+		
+		System.out.println();
+		
+		System.out.print(f);
+		fn = stdIn.next();
+		System.out.print(l);
+		ln = stdIn.next();
+		System.out.print(r);
+		er = stdIn.nextFloat();
+		System.out.print(i);
+		ip = stdIn.nextFloat();
+		System.out.println(fn + s + ln + a + s + era);
+		stdIn.close();
+	}
+}

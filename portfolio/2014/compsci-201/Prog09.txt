@@ -1,0 +1,191 @@
+import java.util.Scanner;
+
+public class Program09 {
+	/************************************Main Class************************************/
+	public static void main(String[] arg){
+
+		 Scanner stdIn = new Scanner(System.in);								//Introduce Scanner
+		 String sPhrase; 														//Introduce Common Phrase
+		 char con; 																//Introduce Consonant Guess
+		 char vow; 																//Introduce Vowel Guess
+		 int cons=0; 															//Introduce and Declare Consonant Counter
+		 int vows =0; 															//Introduce and Declare Consonant Counter
+		 sPhrase = getPhrase(stdIn);											//Declare Common Phrase to equal User Input
+		 char[] tmpArr;															//Introduce Array
+		 tmpArr = new char[sPhrase.length()];									//Declare Array.length
+		 int spaces = initTemplateArray(sPhrase, tmpArr);						//Call Binary Method: initTemplateArray & Set return amount equal to spaces
+
+		 hideAns();																//Call Void 0-arity Method: hideAns (40 lines of whitespace)
+
+		 do{																	//Do Loop: run the response-side of game until answer is revealed.
+		 	 printTemplateArray(tmpArr);
+		 	 con=getConsonant(stdIn);											//Set con equal to Consonant Guess (Gets  user response)
+		 	 cons+=updateTemplateArray(tmpArr, sPhrase, con);					//Adds consonants in the Common Phrase revealed and updates the Array with the guess
+		 	 printTemplateArray(tmpArr);										//Prints an updated array result
+		 	 if(cons>-1 && isFinished(tmpArr)==false && vowLimit(tmpArr, sPhrase)==false){		//If a consonant is guessed correctly, & game is not finished, & Vowels remain in the game to  be guessed...
+		 	 	 vow=getVowel(stdIn);											//Set vow equal to Vowel Guess (Gets user response)
+		 	 	 vows+=updateTemplateArray(tmpArr, sPhrase, vow);				//Adds vowels in the Common Phrase revealed and updates the Array with the guess
+		 }
+
+
+		 }
+		while(isFinished(tmpArr)==false);										//Runs game until the entire phrase is revealed
+		System.out.println();
+		System.out.print("The common phrase contained: "+spaces+" space(s), "+cons+" consonsant(s) and : "+vows+" vowel(s)."); //End game totals. Does not count repeat guesses, though repeat guesses are allowed.
+
+ }
+	/************************************Initialize Template Array*********************/
+ public static int initTemplateArray(String sPhrase, char[] tmpArr){ 			//Initialize the template Array
+	 	 int spaces = 0;
+	 	 for(int i = 0; i < sPhrase.length(); ++i){
+	 	 	 if(Character.isLowerCase(sPhrase.charAt(i))){						 //Sets values of '?' and ' ' in the array where there are lower case letters and spaces.
+	 	 	 	 tmpArr[i]='?';													//if a lower case letter, the array will hold a '?' in the same subscript.
+	 	 	 }
+	 	 	 else{																//or else if a space, the array will hold a ' ' in the same subscript.
+	 	 	 	 tmpArr[i]=' ';
+	 	 	 	 ++spaces;
+	 	 	 }
+	 	 }
+	 	 return spaces; 														//Returns the amount of spaces in the Common Phrase
+ }
+ 	/************************************Print Template Array*************************/
+ public static void printTemplateArray(char[] tmpArr){							//Prints each value of the array
+		 System.out.println();
+	 	 System.out.print("Common Phrase: ");
+	 	 for(int i = 0; i < tmpArr.length; ++i){
+	 	 	 System.out.print(tmpArr[i]);
+	 	 }
+	 	System.out.println();
+	 	System.out.println();
+ }
+ /************************************Initialize Template Array***********************/
+ public static boolean isVowel(char c){											//If char c = a,e,i,o,  or u, then c is a vowel, if not, it is false
+ 	 if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+ 	 return true;
+ 	 else
+ 	 return false;
+ }
+ 	/************************************Get Consonant*******************************/
+ public static char getConsonant(Scanner stdIn){								//Continually prompts user for a consonant guess until it receives the right answer
+ 	 char con;
+ 	 do{
+ 	 	 System.out.print("Enter a lowercase consonant guess : ");
+ 	 	 con = stdIn.next().charAt(0);
+ 	 }
+ 	 while(isVowel(con) || !Character.isLowerCase(con));						//As long as it is not lower case or a vowel, prompt again.
+ 	 return con;
+
+ }
+ 	/************************************Get Vowel**********************************/
+ public static char getVowel(Scanner stdIn){									//Introduce the option and response to buy a vowel
+ 	 	 char vowBuy;
+ 	 	 char vow = 0;
+ 	 	 do{
+ 	 	 System.out.print("Would you like to buy a vowel? : ");
+ 	 	 vowBuy = stdIn.next().charAt(0);
+ 	 	 System.out.println();
+ 	 	 if(vowBuy=='y'){
+ 	 	 	 do{
+ 	 	 	 System.out.print("Enter a lowercase vowel guess : ");
+ 	 	 	 vow = stdIn.next().charAt(0);
+ 	 	 	 }
+ 	 	 	 while(isVowel(vow)==false || !Character.isLowerCase(vow));			 //Check if vowel is indeed a vowel and lower case, if not, prompt again.
+ 	 	 	 return vow;
+ 	 	 }
+ 	 	 else if(vowBuy=='n'){													//If user does not want to buy a vowel, prompt for a consonant.
+ 	 	 	 getConsonant(stdIn);
+ 	 	 }
+ 	 	 }
+ 	 	 while(vowBuy!='y' && vowBuy!='n');
+ 	 	 return vow;
+}
+ 	/************************************Update Template Array****************************/
+ public static int updateTemplateArray(char [] tmpArr, String sPhrase, char guess){
+	 int cnt = 0;
+	 int error = 0;
+ 	 for(int i = 0; i < sPhrase.length(); ++i){
+ 		 if(guess == sPhrase.charAt(i) && tmpArr[i]==guess){					//If the guess is correct in the phrase and already a value in the array
+ 			++error; 															//Add the error
+ 		 }
+ 		 else if(guess == sPhrase.charAt(i)){									//If the guess is only correct in the phrase and not a value in the array
+ 	 	 	 tmpArr[i] = guess;													//Change the value of the subscript in the array to the value of the guess
+ 	 	 ++cnt;																	//Add the valid change
+ 	 	 }
+ 	 }
+ 	 if(cnt>=0 && error==0)														//If there is a valid change or no valid change && it is error free, add change
+ 	 return cnt;
+ 	 else
+ 	return 0;																	//Else, do not return anything.
+ }
+ 	/************************************Get Phrase***********************************/
+ public static String getPhrase(Scanner stdIn){
+ 	 String sPhrase;
+ 	 do{
+ 	 System.out.print("Please enter the phrase to guess at : ");				//Gets user defined Common Phrase and prompts user repeatedly until phrase is valid
+ 	 sPhrase = stdIn.nextLine();
+ 	 System.out.println();
+ 	 }
+ 	 while(!validPhrase(sPhrase));
+ 	 return sPhrase;
+
+ }
+ 	/************************************Validate Phrase************************************/
+ public static boolean validPhrase(String sPhrase){
+ 	 int s = 0;
+ 	 int c = 0;
+ 	 int v = 0;
+ 	 int invalid = 0;
+ 	 for(int i = 0; i < sPhrase.length(); ++i){
+ 	 	 if(Character.isLowerCase(sPhrase.charAt(i))){							//Validates Common phrase, checking each character for consonants, vowels, and whitespace.
+ 	 	 	 if(isVowel(sPhrase.charAt(i))){
+ 	 	 	 	 ++v;
+ 	 	 	 }
+ 	 	 	 else
+ 	 	 	 	 ++c;
+ 	 	 }
+ 	 	 else if(Character.isWhitespace(sPhrase.charAt(i))){
+ 	 	 	 ++s;
+ 	 	 }
+ 	 	 else
+ 	 	 	 ++invalid;
+ 	 }
+ 	 if(c>0 && v>=0 && s>=0 && invalid==0)										//if  the word contains 1 or more consonants, and no invalid characters, the phrase is correct.
+ 	 	 return true;
+ 	 else
+ 	 	 return false;															//False conditions= no word, no consonants, upper case or numbers in the response.
+ }
+ 	/************************************Is Finished************************************/
+ public static boolean isFinished(char[]tmpArr){
+	 for(int i = 0; i < tmpArr.length; ++i){									//If there is no '?' remaining in the template Array, the game is finished
+		 if(tmpArr[i]=='?'){
+			 return false;
+		 }
+	 }
+	 return true;
+ }
+ 	/************************************Set Vowel Limit************************************/
+ public static boolean vowLimit(char[]tmpArr, String sPhrase){
+	 int vowCntSP = 0; 															//Introduces the vowel count for the sPhrase string
+	 int vowCntTA = 0;															//Introduces the vowel count for the tmpArr array
+	 for(int i = 0; i < sPhrase.length();++i){									//Counts vowels in the tmpArr & sPhrase each guess
+		 if(isVowel(sPhrase.charAt(i))){
+			 ++vowCntSP;
+		 }
+	 }
+	 for(int i = 0; i < sPhrase.length();++i){
+		 if(isVowel(tmpArr[i])){
+			 ++vowCntTA;
+		 }
+	 }
+	 if(vowCntTA==vowCntSP)														//When the amount of vowels in the array equals the amount of vowels in the phrase, the game stops requesting vowels
+	 return true;
+	 else
+	 return false;
+ }
+ 	/************************************Hide Answer************************************/
+ public static void hideAns(){													//Prints 40 lines of whitespace
+	 for(int i = 0; i < 40; i++){
+		 System.out.println();
+	 }
+ }
+}

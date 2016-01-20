@@ -1,0 +1,294 @@
+import java.util.Scanner;
+public class Prog10 {
+	public static void main(String[]args){
+		Scanner stdIn = new Scanner(System.in);
+		//Initialize Deck & Hand
+		int[] deck;
+		deck = new int[36];
+		int[] hand;
+		hand = new int[4];
+		//Starts loop with true condition
+		String contGame = "y";
+		//Initializes and Declares betting amount and chips
+		int startAmt = 100;
+		int chips = startAmt;
+		int bet=0;
+		//Records wins and losses
+		int wins = 0;
+		int losses = 0;
+		//Records amounts to earn for each win
+		int quad = 6545;
+		int trip = 51;
+		int straight = 38;
+		int twoPair = 22;
+		int pair= 1;
+		//Records each type of game win
+		int isQuad = 0;
+		int isTrip = 0;
+		int isStraight = 0;
+		int is2Pair = 0;
+		int isPair = 0;
+		int isBubkiss = 0;
+		//Welcome Screen & Rules
+		welcome();
+
+		do{
+			//Dealer Actions
+			initDeck(deck);
+			shuffleDeck(deck, 100);
+			dealHand(deck,hand);
+			bet=setBet(bet,chips,stdIn);
+			displayHand(hand);
+
+			//Game Conditions & Total Counters
+		if(isQuad(hand)){
+			System.out.println();
+			System.out.println("4 of a kind");
+			chips+=(quad+bet);
+			System.out.println("You have " + chips + " chips left.");
+			++wins;
+			++isQuad;
+
+
+		}
+		else if(isTrip(hand)){
+			System.out.println();
+			System.out.println("3 of a kind");
+			chips+=(trip+bet);
+			System.out.println("You have " + chips + " chips left.");
+			++wins;
+			++isTrip;
+
+		}
+		else if(isStraight(hand)){
+			System.out.println();
+			System.out.println("Straight");
+			chips+=(straight+bet);
+			System.out.println("You have " + chips + " chips left.");
+			++wins;
+			++isStraight;
+
+		}
+		else if(is2Pair(hand)){
+			System.out.println();
+			System.out.println("Two Pair");
+			chips+=(twoPair+bet);
+			System.out.println("You have " + chips + " chips left.");
+			++wins;
+			++is2Pair;
+
+		}
+		else if(isPair(hand)){
+			System.out.println();
+			System.out.println("2 of a kind - Pair");
+			chips+=(pair+bet);
+			System.out.println("You have " + chips + " chips left.");
+			++wins;
+			++isPair;
+
+		}
+		else{
+			System.out.println();
+			System.out.println("You lose. Bubkiss");
+			chips-=bet;
+			System.out.println("You have " + chips + " chips left.");
+			++losses;
+			++isBubkiss;
+
+		}
+		//Prompts player to Continue Game (yes or no)
+		contGame=continueGame(contGame, stdIn, chips);
+		//Exit game: Prints totals & game details
+		if(contGame.equalsIgnoreCase("n") || chips ==0){
+			//Game Details method
+			totDetails(isQuad, isTrip, isStraight, is2Pair, isPair, isBubkiss, bet);
+			//Game Totals method
+			runTotals(chips, wins, losses, startAmt);
+			//End game
+			return;
+		}
+	}
+	while((contGame.equalsIgnoreCase("y") || contGame.equalsIgnoreCase("n")) && chips>0 );
+
+
+	}
+	public static void initDeck(int[] deck){
+		int n = 0;
+		for(int i = 0; i < deck.length; ++i){
+			deck[i]=n+1;
+			++n;
+			if(n==9){	//If deck counts up to 9, n will reset to 0 and post 1-9 until the array reaches the effective size
+				n=0;
+			}
+		}
+
+	}
+	public static void shuffleDeck(int[] deck, int n){ //Swaps random values within the array n times
+		for(int i = 0; i < n; ++i){
+			deck[(int)(Math.random()*(deck.length-1)+1)]=deck[(int)(Math.random()*(deck.length-1)+1)];
+		}
+	}
+	public static void dealHand(int [] deck, int[] hand){ //deals first 4 cards & sorts them in high-to-low order
+		for(int i = 0; i < 4; ++i){
+			hand[i] = deck[i];
+			sortHand(hand);
+		}
+
+	}
+	public static void displayHand(int[] hand){ //Shows hand in reasonable format
+		System.out.println("---------------------------\n"
+				+ "     Shuffling cards..."
+				+ "\n"
+				+ "\n"
+				+ "Your hand is...");
+		for(int i = 0; i < 4; ++i){
+
+			System.out.print("["+hand[i]+"]");
+		}
+		System.out.println("\n");
+	}
+	public static boolean isQuad(int[] hand){
+		if(hand[0]==hand[1] && hand[2]==hand[3] && hand[0]==hand[3]){ //4 of a Kind
+			return true;
+		}
+		return false;
+
+	}
+	public static boolean isTrip(int[] hand){
+		if((hand[1]==hand[0] && hand[1]==hand[2]) || (hand[1]==hand[2] && hand[1]==hand[3])){ //3 of a Kind
+			return true;
+		}
+		return false;
+
+	}
+	public static boolean isStraight(int[] hand){
+		if(hand[0]-1 == hand[1] && hand[1]-1 == hand[2] && hand[2]-1==hand[3]){        //Straight
+			return true;
+		}
+		return false;
+
+	}
+	public static boolean is2Pair(int[] hand){
+		if(hand[0] == hand[1] && hand[2]==hand[3]){  //2 Pair
+			return true;
+		}
+		return false;
+
+	}
+	public static boolean isPair(int[] hand){
+		if(hand[0] == hand[1] || hand[1]==hand[2] || hand[2]==hand[3]){  //2 of a Kind - Pair
+			return true;
+		}
+		return false;
+
+	}
+	public static void sortHand(int[] hand)		//Sort hand method
+	{
+		for (int i = 0; i < hand.length; ++i)
+		{
+			int maxLoc = i;
+			for (int j = i+1; j < hand.length; ++j)
+				if (hand[j] > hand[maxLoc])
+					maxLoc = j;
+		int tmp = hand[i];
+		hand[i] = hand[maxLoc];
+		hand[maxLoc] = tmp;
+		}
+	}
+	public static void runTotals(int chips, int wins, int losses, int startAmt){ //Prints totals for game
+		int netWins = chips-startAmt;
+		System.out.println("      Game Totals     \n"
+				+ "-------------------------\n"
+				+ "Hands played:\t " + (wins + losses) +"\n"
+				+ "Wins:   \t " + wins +"\n"
+				+ "Losses: \t " + losses + "\n"
+				+ "Net wins/losses: \t$" + netWins + "\n");
+
+		if(wins>losses){
+			System.out.println();
+			System.out.print("Great Game! Bye!");
+		}
+		else{
+			System.out.println();
+			System.out.print("Better luck next time!");
+		}
+	}
+	public static void totDetails(int isQuad, int isTrip, int isStraight, int is2Pair, int isPair, int isBubkiss, int bet){
+		int avgWin; 									// Prints game details & average wins (without the bets placed)
+		System.out.println("Details: \n"
+		+ "4 of a Kind: \t " + isQuad + "\n"
+		+ "3 of a Kind: \t " + isTrip + "\n"
+		+ "Straight:    \t " + isStraight + "\n"
+		+ "Two Pair:    \t " + is2Pair + "\n"
+		+ "2 of a Kind: \t " + isPair + "\n"
+		+ "Bubkiss:     \t " + isBubkiss + "\n");
+		avgWin = (isQuad*6545 + isTrip*51 + isStraight*38 + is2Pair*22 + isPair*1)/(isQuad+isTrip+isStraight+is2Pair+isPair+isBubkiss);
+		System.out.println("Average winnings on top of bet: \t $" + avgWin + "\n");
+	}
+	public static int setBet(int bet, int chips,Scanner stdIn){	//Prompts user for bet
+
+		System.out.println("You have " + chips + " chips.\n");
+		do{
+			System.out.print("How much would you like to bet?(minimum: 1 chip) : ");
+			bet = stdIn.nextInt();
+		}
+		while(bet<1 || bet>chips);
+		System.out.print("\nTaking in your bet of " + bet + " chips. You have " + (chips-=bet) + " chips left.\n\n");
+		return bet;
+	}
+	public static String continueGame(String contGame, Scanner stdIn, int chips){ //Continues game if enough chips are available
+		do{
+			System.out.println();
+			System.out.print("Do you want to play again? [y,n] : ");
+			contGame=stdIn.next();
+			System.out.println();
+		}
+		while((!contGame.equalsIgnoreCase("y") && !contGame.equalsIgnoreCase("n")) && chips>0 );
+
+		return contGame;
+	}
+	public static void welcome(){ //Game rules
+		System.out.println("        Welcome to Computer Poker!\n"
+				+ "      -------------------------------\n"
+				+ "\n"
+				+ " -----------------Game Rules:-----------------\n"
+				+ "4 of a Kind: If the number on each of the players' \n"
+				+ "four cards is the same then the player gets their \n"
+				+ "bet back and in addition wins 6545 chips for each \n"
+				+ "chip that was placed in that bet.\n"
+				+ "\n"
+				+ "3 of a Kind: If the number on exactly three of the\n"
+				+ "players' four cards is the same then the player \n"
+				+ "gets their bet back and in addition wins 51 chips \n"
+				+ "for each chip that was placed in that bet."
+				+ "\n"
+				+ "Straight: If the number on the players' four cards \n"
+				+ "can be arranged so that they form a consecutive \n"
+				+ "4 number sequence then the player gets their bet \n"
+				+ "back and in addition wins 38 chips for each chip \n"
+				+ "that was placed in that bet.\n"
+				+ "\n"
+				+ "Two Pair: If the number on two of the players' \n"
+				+ "four cards is the same and the number on the \n"
+				+ "remaining two cards is also the same yet the \n"
+				+ "number on all four cards in not the same then \n"
+				+ "the player gets their bet back and in addition \n"
+				+ "wins 22 chips for each chip that was placed in \n"
+				+ "that bet.\n"
+				+ "\n"
+				+ "Pair - 2 of a Kind: If the number on exactly two \n"
+				+ "of the players' four cards is the same and the \n"
+				+ "number on the remaining two cards are different \n"
+				+ "then the player gets their bet back and in \n"
+				+ "addition wins 1 chip for each chip that was \n"
+				+ "placed in that bet.\n"
+				+ "\n"
+				+ "Bubkiss: If the players' cards do not \n"
+				+ "constitute one of the above five hands then \n"
+				+ "the player losses - does not get their bet back.\n"
+				+ "\n"
+				+ "---------------------------------------------------\n"
+				+ "               Let's get started!\n");
+	}
+
+}

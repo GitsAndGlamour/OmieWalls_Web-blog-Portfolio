@@ -1,0 +1,272 @@
+import java.util.Scanner;
+public class Prog07Updated{
+public static void main(String[]args){
+
+//Introduce the Game Rules
+System.out.println("          Welcome to Computer Dice");
+System.out.println("-----------------------------------------------");
+System.out.println("You will be playing dice against the computer");
+System.out.println("you can only win with a Pair or a Straight");
+System.out.println("any Pair beats any Straight: you'll win or lose $3");
+System.out.println("any Pair beats any Junker: you'll win or lose $4");
+System.out.println("any Straight beats any Junker: you'll win or lose $1");
+System.out.println("in case of two Pairs - high pair wins: you'll win $5 or lose $1");
+System.out.println("in case of two Straights - high Straight wins: you'll win or lose $2");
+System.out.println("in the case of a Junker or tie, you lose $1");
+System.out.println("-----------------------------------------------");
+
+
+//Introduce the Player/Opponent Dice
+int playerDice1=0;
+int playerDice2=0;
+int opponentDice1=0;
+int opponentDice2=0;
+
+//Introduce the Scanner
+Scanner computerDice = new Scanner(System.in);
+
+//Introduce 'Continue game' answer & set True for while loop condition
+String continueGame = ("Y");
+
+//Introduce Game counters
+int wins = 0;
+int losses = 0;
+int rounds;
+
+//Introduce the Tab & Tab counters
+int tab=0;
+int addMoney=0;
+int subMoney=0;
+
+do
+{//Ask Player for tab & repeat if user enters tab under $1
+System.out.println();
+System.out.println("How much money are you putting on the tab? ");
+System.out.print("Tab amount: ");
+tab = computerDice.nextInt();
+System.out.println();
+System.out.println("Great! $" + tab + ".00 has been added to the tab.");
+System.out.println();
+System.out.println("  Let's roll the dice!.........");
+System.out.println();
+}
+while(tab<=0);
+//Introduce option to add Tab later in game
+String addTab;
+
+while(continueGame.equalsIgnoreCase("Y") && tab>0)
+{//While loop: continueGame = ("Y") and Player has a tab
+	
+//Set-up Dice with random integers [1,6] inclusive
+playerDice1 = (int)(Math.random()*6+1);
+playerDice2 = (int)(Math.random()*6+1);
+opponentDice1 = (int)(Math.random()*6+1);
+opponentDice2 = (int)(Math.random()*6+1);	
+
+//Set the Boolean conditions
+boolean pairPlayer = playerDice1 == playerDice2;
+boolean straightPlayer = (playerDice1 - playerDice2 == 1) || (playerDice2 - playerDice1 == 1);
+boolean junkerPlayer = (playerDice1 != playerDice2) && (!(playerDice1 - playerDice2 == 1) || (playerDice2 - playerDice1 == 1));
+boolean highWin = (playerDice1 + playerDice2) > (opponentDice1 + opponentDice2);
+boolean pairOpponent = opponentDice1 == opponentDice2;
+boolean straightOpponent = (opponentDice1 - opponentDice2 == 1) || (opponentDice2 - opponentDice1 == 1);
+boolean junkerOpponent = (opponentDice1 != opponentDice2) && (!(opponentDice1 - opponentDice2 == 1) || (opponentDice2 - opponentDice1 == 1));
+boolean tie = (playerDice1 + playerDice2) == (opponentDice1 + opponentDice2);
+
+//Display playerDice & opponent Dice
+System.out.println("   You \t \t \t \t Opponent");
+System.out.println("-------------------------------------------");
+System.out.println();
+System.out.println("[" + playerDice1 + "  &  " + playerDice2 + "]\t \t \t [" + opponentDice1 + "  &  " + opponentDice2 +"]");
+System.out.println();
+
+
+	if (tie)
+		{//Player and Opponent tie: Player loses $1
+			System.out.println("You and the Opponent tied! You lose $1!");
+			++losses;
+			--tab;
+			++subMoney;
+			System.out.println("Remaining tab: $" + tab + ".00");
+		}
+	else if (pairPlayer)
+		{//Player rolls a Pair
+			System.out.println("You rolled a pair!");
+			if(pairOpponent)
+			{//...and Opponent rolls a Pair
+				if(highWin)
+				{//if Player has highWin : Player wins $5
+					System.out.println("You win $5 with a higher pair!");
+					++wins;
+					tab+=5;
+					addMoney+=5;
+					System.out.println("Remaining tab: $" + tab + ".00");
+				}
+				else
+				{//if Opponent has highWin : Player loses $1
+					System.out.println("Oh no! You lose $1 to Opponent's higher pair!");
+					++losses;
+					--tab;
+					++subMoney;
+					System.out.println("Remaining tab: $" + tab + ".00");
+				}
+			
+			}
+			else if(straightOpponent)
+				{//...and Opponent rolls a Straight : Player wins $3
+					System.out.println("You win $3 to Opponent's straight!");
+					++wins;
+					tab+=3;
+					addMoney+=3;
+					System.out.println("Remaining tab: $" + tab + ".00");
+				}
+			else if(junkerOpponent)
+				{//...and Opponent rolls a Junker : Player wins $4
+					System.out.println("You win $4 to Opponent's junker!");
+					++wins;
+					tab+=4;
+					addMoney+=4;
+					System.out.println("Remaining tab: $" + tab + ".00");
+				}
+		}
+	else if (straightPlayer)
+		{//Player rolls a Straight 
+			System.out.println("You rolled a straight!");
+			if(straightOpponent)
+			{//...and Opponent rolls a Straight
+				if(highWin)
+				{//if Player has highWin : Player wins $2
+					System.out.println("You win $2 with a higher straight!");
+					++wins;
+					tab+=2;
+					addMoney+=2;
+					System.out.println("Remaining tab: $" + tab + ".00");
+				}
+				else
+				{//if Opponent has highWin : Player loses $2
+					System.out.println("Oh no! You lose $2 to Opponent's higher straight!");
+					++losses;
+					tab-=2;
+					subMoney+=2;
+					System.out.println("Remaining tab: $" + tab + ".00");
+				}
+			}
+			else if(pairOpponent)
+			{//...and Opponent rolls a Pair : Player loses $3
+				System.out.println("Oh no! You lose $3 to Opponent's pair!");
+				++losses;
+				tab-=3;
+				subMoney+=3;
+				System.out.println("Remaining tab: $" + tab + ".00");
+			}
+			else if(junkerOpponent)
+			{//...and Opponent rolls a Junker : Player wins $1
+				System.out.println("You win $1 to Opponent's junker!");
+				++wins;
+				++tab;
+				++addMoney;
+				System.out.println("Remaining tab: $" + tab + ".00");
+			}
+		}
+	else
+		{//Player rolls a Junker : Player loses $1
+		System.out.println("You rolled a junker!");
+			
+				System.out.println("You lose $1!");
+				++losses;
+				--tab;
+				++subMoney;
+				System.out.println("Remaining tab: $" + tab + ".00");
+		}	
+	do 
+		{//continueGame prompt: Yes or No & repeat if undesired response occurs
+			System.out.println();
+			System.out.println("----------------------------------------------------");
+			System.out.print("  Do you want to play Computer Dice again? [y,n]: ");
+			continueGame = computerDice.next();			
+		}
+	while (!(continueGame.equalsIgnoreCase("N") || continueGame.equalsIgnoreCase("Y")));	
+
+	if(continueGame.equalsIgnoreCase("Y"))
+	{//continueGame prompt "Y" response
+		if(tab<=0)
+			{//Asks player to bring tab to a positive balance
+				System.out.println();
+				System.out.println("Okay, but let's add more money to your tab first...");
+				while(tab<=0)
+					{//Prompts player to bring tab to a positive balance and repeats if tab is < 1
+					System.out.println("You don't have enough money. You need at least $1. You have: $" + tab + ".00.");
+					System.out.print("How much money would you like to add?: ");
+					tab += computerDice.nextInt();
+					
+					}
+					System.out.println();
+					System.out.println("Excellent! $" + tab + ".00 is your current tab!");
+			}
+		System.out.println();
+		System.out.println("Okay, let's roll again!.........");
+		System.out.println();
+	}
+	else if(continueGame.equalsIgnoreCase("N"))
+	{//If Player selects No: Print end game and tab totals 
+		rounds = wins + losses;
+		System.out.println();
+		System.out.println("---------------------------------");
+		System.out.println(" Computer Dice Results");
+		System.out.println();
+		System.out.println("You played " + rounds + " rounds");
+		System.out.println();
+		System.out.println("You won: " + wins + " rounds \t Cash won: $" + addMoney);
+		System.out.println("You lost: " + losses + " rounds \t Cash lost: $" + subMoney);
+		System.out.println("Total money earned/lost: $" + (addMoney-subMoney));
+		System.out.println("Remaining tab: $" + tab);
+		System.out.println("---------------------------------");	
+		do
+		{//Ask if player is sure they're done & repeat if undesired response occurs
+		System.out.print("Are you sure you're done? Let's play again! [y,n]: ");
+		continueGame = computerDice.next();
+		System.out.println();
+			if (continueGame.equalsIgnoreCase("N"))
+			{//Player is officially done with playing : end game
+				if(addMoney>subMoney)
+				System.out.print("Great game! Bye! :)");
+				else
+				System.out.print("Alright, game over! Better luck next time, bye! :)");
+			}
+			else if (continueGame.equalsIgnoreCase("Y"))
+			{//Player has continued playing: resume game
+				System.out.println("Okay, continuing game!.....");
+				System.out.println();
+				do
+				{//Ask Player if they want to add to the tab & repeat if undesired response occurs
+					System.out.print("But first, would you like to add more money to your tab? [y,n]: ");
+					//Introduce response variable for addTab
+					addTab = computerDice.next();
+					System.out.println();
+						if(addTab.equalsIgnoreCase("Y"))
+						{//Player agrees to add to the tab
+							do
+							{//Prompts player to add to the tab and reprompts as long as there is no money
+								System.out.print("How much would you like to add?: ");
+								//Player adds tab to total (Note: I can't believe this idea worked...)
+								tab += computerDice.nextInt();
+								if(tab>0)//Print out confirmation of tab entry
+								System.out.println("Excellent! $" + tab + ".00 is your current tab!");
+								else
+								System.out.println("Invalid entry. Please try again.");
+							}
+							while(tab<=0);
+						}
+				}
+				while(!(addTab.equalsIgnoreCase("Y") || addTab.equalsIgnoreCase("N")));
+			}
+		}
+		while (!(continueGame.equalsIgnoreCase("Y") || continueGame.equalsIgnoreCase("N")));
+	}
+
+}//close while loop	
+
+//close Scanner
+computerDice.close();
+
+}}//close public class & close public static void main

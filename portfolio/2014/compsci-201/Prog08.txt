@@ -1,0 +1,103 @@
+import java.util.Scanner;
+public class Prog08 {
+	public static void main(String[]args){
+    //initialize the String variable
+		String str;
+
+        //call welcome prompt method (void, 0-arity)
+		welcome();
+
+        //initialize & declare Scanner
+		Scanner stdIn=new Scanner(System.in);
+
+        //str = Method getDecimal's return statement(User Input)
+		do{
+			str=getDecimal(stdIn);
+
+        //general condition for User Input (1st condition: 'Quit')
+		if(str.equalsIgnoreCase("Q")){
+            //Quit statement.
+			System.out.println();
+			System.out.print("There are 10 kinds of people in this world,\n Those who understand binary, and those who don't.");
+		}
+        //Method condition for User Input (2nd condition: 'Validity')
+		else if (isDecimal(str)==true){
+			toBinary(str);
+		}
+
+	}   //Continue loop if answer falls outside of both conditions.
+		while(!(str.equalsIgnoreCase("Q") || isDecimal(str)));
+	}
+
+    //METHOD: welcome prompt: void, 0-arity
+	public static void welcome(){
+		//runs a welcome prompt; no return statement
+		System.out.println("Welcome to BinaryCalc 3000!");
+		System.out.println();
+	}
+
+    //METHOD: valid Decimal Integer check
+	public static boolean isDecimal(String str){
+        //Initialize counting method for digits; Declare at 0
+		int digit=0;
+
+        //Initialize counting method for invalid characters; Declare at 0
+		int notDigit = 0;
+
+        //For loop runs through each character in User Input
+		for(int i=0;i<str.length();i++){
+
+        //if/else Condition: Checks if character is a digit at every subscript
+		if(Character.isDigit(str.charAt(i))){
+			++digit;		//Adds up valid digits
+		}
+		else{
+			++notDigit;    //Adds up invalid characters
+		}
+		}
+            //if/else Condition: Checks if user has entered at least 1 digit
+                //and makes sure there are no invalid characters.
+			if(digit>0 && notDigit==0)
+			{
+			return true;	//Return statement
+			}
+			else
+			{
+			return false;   //Return statement
+			}
+	}
+	public static String getDecimal(Scanner stdIn){ //METHOD: Prompt user input & get response.
+		String str;
+
+			System.out.print("Please input a decimal integer or 'q' to quit: ");
+			str = stdIn.next();
+
+    //Store response in Return statement
+	return str;
+	}
+
+    //METHOD: Converts text string to a decimal integer & then to binary code.
+	public static String toBinary(String str){
+
+    	//Converts User input to to the actual value of the integer represented by the String.
+		int strValue = Integer.parseInt(str);
+
+        //Initialize and Declare variable for Binary code
+		String binary = "";
+
+        //foor Looop which takes the value of the ParseInt and divides the sum by 2 until it reaches 0.
+		for(int i=strValue;i>0;i/=2)
+		{
+        //if/else Condition: Remainder of sum is 0 or 1, binary string will add the respective values.
+			if(i%2==0){
+				binary += "0";
+			}
+			else if(i%2==1){
+				binary += "1";
+			}
+		}
+        //Print out result of the binary code
+		System.out.print("'"+str+"'" + " in binary is: " + binary);
+	return binary;	//Return binary string [unused]
+	}
+}
