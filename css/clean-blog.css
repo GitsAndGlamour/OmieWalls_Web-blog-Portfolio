@@ -30,7 +30,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: red;
+  color: #ED1C22;
 }
 a img:hover,
 a img:focus {
@@ -114,14 +114,14 @@ hr.small {
   }
   .navbar-custom.is-fixed .navbar-brand:hover,
   .navbar-custom.is-fixed .navbar-brand:focus {
-    color: red;
+    color: #ED1C22;
   }
   .navbar-custom.is-fixed .nav li a {
     color: #404040;
   }
   .navbar-custom.is-fixed .nav li a:hover,
   .navbar-custom.is-fixed .nav li a:focus {
-    color: red;
+    color: #ED1C22;
   }
   .navbar-custom.is-visible {
     /* if the user changes the scrolling direction, we show the header */
@@ -216,7 +216,7 @@ hr.small {
 .post-preview > a:hover,
 .post-preview > a:focus {
   text-decoration: none;
-  color: red;
+  color: #ED1C22;
 }
 .post-preview > a > .post-title {
   font-size: 30px;
@@ -240,7 +240,7 @@ hr.small {
 }
 .post-preview > .post-meta > a:hover,
 .post-preview > .post-meta > a:focus {
-  color: red;
+  color: #ED1C22;
   text-decoration: underline;
 }
 @media only screen and (min-width: 768px) {
@@ -320,7 +320,7 @@ footer .copyright {
   opacity: 1;
 }
 .floating-label-form-group-with-focus label {
-  color: red;
+  color: #ED1C22;
 }
 form .row:first-child .floating-label-form-group {
   border-top: 1px solid #eeeeee;
@@ -340,7 +340,7 @@ form .row:first-child .floating-label-form-group {
 }
 .btn-default:hover,
 .btn-default:focus {
-  background-color: red;
+  background-color: #ED1C22;
   border: 1px solid red;
   color: white;
 }
@@ -361,7 +361,7 @@ form .row:first-child .floating-label-form-group {
 .pager li > a:hover,
 .pager li > a:focus {
   color: white;
-  background-color: red;
+  background-color: #ED1C22;
   border: 1px solid red;
 }
 .pager .disabled > a,
@@ -391,5 +391,5 @@ img::-moz-selection {
   background: transparent;
 }
 body {
-  webkit-tap-highlight-color: red;
+  webkit-tap-highlight-color: #ED1C22;
 }
